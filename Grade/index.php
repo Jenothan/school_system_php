@@ -4,6 +4,7 @@
 	</head>
 	<body>
 		<?php 
+			include('../auth/auth_session.php');
 			require_once('../config.php');
 		
 			$query="SELECT * FROM grade WHERE deleted_at IS NULL";

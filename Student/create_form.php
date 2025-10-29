@@ -8,6 +8,7 @@
 	</style>
   </head>
   <body>
+  <?php include('../auth/auth_session.php'); ?>
     <div class="form">
       <form action="store.php" method="POST">
         <h1>Create Student</h1>

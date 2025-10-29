@@ -4,6 +4,7 @@
   </head>
   <body>
 <?php 
+		include('../auth/auth_session.php');
 		$id=$_GET['id'];
 		require_once('../config.php');
 
