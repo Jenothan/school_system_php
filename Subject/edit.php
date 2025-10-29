@@ -8,9 +8,9 @@
 	</style>
   </head>
   <body>
-   <?php $id=$_GET['id']; ?>
-   
 	<?php 
+		include('../auth/auth_session.php');
+		$id=$_GET['id'];
 		require_once('../config.php');
 		
 		$query="SELECT * FROM subjects WHERE id='$id'";

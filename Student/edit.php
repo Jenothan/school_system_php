@@ -11,6 +11,7 @@
    <?php $id=$_GET['id']; ?>
    
 	<?php 
+		include('../auth/auth_session.php');
 		require_once('../config.php');
 		
 		$query="SELECT * FROM students WHERE id='$id'";

@@ -8,6 +8,7 @@
 	</style>
   </head>
   <body>
+  <?php include('../auth/auth_session.php'); ?>
    <?php $id=$_GET['id']; ?>
    
 	<?php 
