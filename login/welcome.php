@@ -10,5 +10,7 @@
 			echo"<p> Login success</p>"; 
 		?>
 		<a href="logout.php">Logout</a>
+		
+		
 	</body>
 </html>
