@@ -33,8 +33,8 @@
 			$gender=$row['gender']?? "";
 			$telephone=$row['telephone'];
 			$address=$row['address'];
-		
 	?>
+	
     <div class="form">
       <form action="update.php" method="POST">
         <h1>Edit Student</h1>
@@ -58,10 +58,25 @@
           </div>
         </div>
 		
+		
 		<div class="row">
           <div class="col">
             <label for="grade_id">Grade ID</label>
-            <input type="text" id="grade_id" name="grade_id" value="<?php echo $grade_id; ?>" required />
+			<select name="grade_id" id="grade_id" required>
+				<option value="" disabled selected>Select your Grade</option>
+				
+	<?php
+			$quer="SELECT id, grade_name FROM grade";
+		
+			$res=mysqli_query($con, $quer);
+			
+			if(!$res) {
+				die("Query Failed!".mysqli_error($con));
+			}
+			while($rows=mysqli_fetch_assoc($res)) { ?>
+				<option value="<?php echo $rows['id']; ?>" <?php echo $rows['id']==$grade_id ? 'selected' : ''; ?>><?php echo $rows['grade_name']; ?></option>
+			<?php } ?>
+			</select>
           </div>
         </div>
 		

@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<link rel='stylesheet' href='../global.css' />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	</head>
 	<body>
 		<?php 
@@ -31,9 +32,9 @@
 					<td><?php echo $row[3]; ?></td>
 					<td><?php echo $row[4]; ?></td>
 					<td><?php echo $row[5]; ?></td>
-					<td><button class="delete"><a href="delete.php?id=<?php echo $row[0]; ?>" onclick="return confirm('Do you want to delete?')">Delete</a></button></td>
-					<td><button class="edit"><a href="edit.php?id=<?php echo $row[0]; ?>">Edit</a></button></td>
-					<td><button class="show"><a href="show.php?id=<?php echo $row[0]; ?>">View</a></button></td>
+					<td><a href="delete.php?id=<?php echo $row[0]; ?>" onclick="return confirm('Do you want to delete?')"><button class="btn btn-danger">Delete</button></a></td>
+					<td><a href="edit.php?id=<?php echo $row[0]; ?>"><button class="btn btn-warning">Edit</button></a></td>
+					<td><a href="show.php?id=<?php echo $row[0]; ?>"><button class="btn btn-info">View</button></a></td>
 				</tr>
 			<?php } ?>
 			</table>

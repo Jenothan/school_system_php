@@ -2,6 +2,10 @@
   <head>
     <link rel="stylesheet" href="../global.css">
 	<style>
+		body{
+			justify-content: center;
+			
+		}
 		.form {
 			width: 500px;
 		}

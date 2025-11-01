@@ -36,6 +36,7 @@ body {
       input[type="number"],
       input[type="tel"],
       input[type="date"],
+	  select,
 	  textarea
 		{
         width: 100%;

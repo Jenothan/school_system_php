@@ -8,7 +8,19 @@
 	</style>
   </head>
   <body>
-  <?php include('../auth/auth_session.php'); ?>
+  <?php 
+		include('../auth/auth_session.php');
+		require_once('../config.php');
+		
+		$query="SELECT id, grade_name FROM grade";
+		
+		$result=mysqli_query($con, $query);
+		
+		if(!$result) {
+			die("Query Failed!".mysqli_error($con));
+		}
+		
+  ?>
     <div class="form">
       <form action="store.php" method="POST">
         <h1>Create Student</h1>
@@ -35,7 +47,13 @@
 		<div class="row">
           <div class="col">
             <label for="grade_id">Grade ID</label>
-            <input type="text" id="grade_id" name="grade_id" required />
+			<select name="grade_id" id="grade_id" required>
+				<option value="" disabled selected>Select your Grade</option>
+				
+			<?php while($row=mysqli_fetch_assoc($result)) { ?>
+				<option value="<?php echo $row['id']; ?>"><?php echo $row['grade_name']; ?></option>
+			<?php } ?>
+			</select>
           </div>
         </div>
 		
