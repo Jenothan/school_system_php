@@ -3,7 +3,7 @@
 			
 			require_once('../config.php');
 			
-			$query = "DELETE FROM subjects SET deleted_at=NOW() WHERE id='$id'";	
+			$query = "UPDATE subjects SET deleted_at=NOW() WHERE id='$id'";	
 			
 			$result=mysqli_query($con,$query);
 		
