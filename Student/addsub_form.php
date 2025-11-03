@@ -1,8 +1,9 @@
+<!-- addsub_form.php -->
 <html>	
   <head>
     <link rel="stylesheet" href="../global.css">
 	<style>
-	.check-loop{
+	.check-loop {
 		display: flex;
 		flex-direction: row;
         justify-content: center;
