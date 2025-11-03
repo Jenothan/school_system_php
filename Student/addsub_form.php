@@ -91,6 +91,10 @@
 		  <input type="hidden" value="<?php echo $id; ?>" name='id'/>
 		  <div class="name-row">
 		  <?php 
+		  
+		 //--------------------------------------------------------------------------------------------------------
+		 
+		 
 				$stu_sub_query="SELECT subject_id FROM student_subject WHERE student_id='$id'";
 				$stu_sub_res=mysqli_query($con, $stu_sub_query);
 				if(!$stu_sub_res) {
@@ -109,20 +113,36 @@
 					echo "Subjects not found";
 				}
 				
-		  ?>
-		  <?php
-			$quer="SELECT id, subject_name FROM subjects";
+		//--------------------------------------------------------------------------------------------------------
+		
+		
+			$quer="SELECT subject_id FROM grade_subject WHERE grade_id='$grade_id'";
 		
 			$res=mysqli_query($con, $quer);
 			
 			if(!$res) {
 				die("Query Failed!".mysqli_error($con));
 			}
-			while($rows=mysqli_fetch_assoc($res)) { ?>
+		
+			while($rows=mysqli_fetch_assoc($res)) {
+				$sub_id=$rows['subject_id'];
+				$que="SELECT id, subject_name FROM subjects WHERE id='$sub_id'";
+		
+				$re=mysqli_query($con, $que);
+				
+				if(!$re) {
+					die("Query Failed!".mysqli_error($con));
+				}
+			
+				while($rows1=mysqli_fetch_assoc($re)) {
+					
+			//-------------------------------------------------------------------------------------------------			
+				?>
 			<div class="check-loop">
-		  <input type="checkbox" id="="<?php echo $rows['subject_name']; ?>" value="<?php echo $rows['id']; ?>" name="subjects[]" <?php if(in_array($rows['id'], $subject_ids)) { echo "checked"; } ?> />
-		  <label for="<?php echo $rows['subject_name']; ?>" ><?php echo $rows['subject_name']; ?></label>
-		  </div>
+			  <input type="checkbox" id="<?php echo $rows1['subject_name']; ?>" value="<?php echo $rows1['id']; ?>" name="subjects[]" <?php if(in_array($rows['subject_id'], $subject_ids)) { echo "checked"; } ?> />
+			  <label for="<?php echo $rows1['subject_name']; ?>" ><?php echo $rows1['subject_name']; ?></label>
+			</div>
+			<?php } ?>
 			<?php } ?>
 			</div>
 			

@@ -6,8 +6,8 @@
 			require_once('../config.php');
 			
 			if(!empty($subjects)){
-				$que= "DELETE FROM student_subject WHERE student_id=$id";
-					$res = mysqli_query($con,$que);
+				$que= "DELETE FROM grade_subject WHERE grade_id=$id";
+					$res = mysqli_query($con, $que);
 					
 					if(!$res){
 						die("query failed".mysqli_error($con));
@@ -15,12 +15,12 @@
 			}
 			
 			foreach($subjects as $subject) {
-				$query="INSERT INTO student_subject (student_id, subject_id) VALUES ('$id', '$subject')";
+				$query="INSERT INTO grade_subject (grade_id, subject_id) VALUES ('$id', '$subject')";
 			
 				$result=mysqli_query($con,$query);
 			
 				if(!$result){
-					echo mysqli_error($con);
+					die("Query failed".mysqli_error($con));
 				}
 			}
 			

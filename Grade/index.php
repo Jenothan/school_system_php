@@ -22,7 +22,7 @@
 					<th>Grade Group</th>
 					<th>Grade Color</th>
 					<th>Grade Order</th>
-					<th colspan='3'>Actions</th>
+					<th colspan='4'>Actions</th>
 				</tr>
 			<?php while($row=mysqli_fetch_array($result)) { ?>
 				<tr>
@@ -33,6 +33,7 @@
 					<td><a href="delete.php?id=<?php echo $row[0]; ?>" onclick="return confirm('Do you want to delete?')"><button class="btn btn-danger">Delete</button></a></td>
 					<td><a href="edit.php?id=<?php echo $row[0]; ?>"><button class="btn btn-warning">Edit</button></a></td>
 					<td><a href="show.php?id=<?php echo $row[0]; ?>"><button class="btn btn-info">View</button></a></td>
+					<td><a href="add_grade_sub_form.php?id=<?php echo $row[0]; ?>"><button class="btn btn-primary">Add Sub</button></a></td>
 				</tr>
 			<?php } ?>
 			</table>
