@@ -15,16 +15,35 @@
 		include('../auth/auth_session.php');
 		$id=$_GET['id'];
 		require_once('../config.php');
+		
+		//---------------------------------------------------------------------------------
 
-		$query="SELECT * FROM students WHERE id='$id'";
-		
-		$results=mysqli_query($con, $query );
-		
-		if(!$results){
+		$student_query="SELECT * FROM students WHERE id='$id'";
+		$student_results=mysqli_query($con, $student_query);
+		if(!$student_results){
 			echo mysqli_error($con);
 		}
 		
-		$row = mysqli_fetch_array($results);
+		//---------------------------------------------------------------------------------
+		
+		$stu_sub_query="SELECT subject_id FROM student_subject WHERE student_id='$id'";
+		$stu_sub_res=mysqli_query($con, $stu_sub_query);
+		if(!$stu_sub_res) {
+			die("Query Failed!".mysqli_error($con));
+		}
+		
+		//----------------------------------------------------------------------------------
+		
+		$quer="SELECT subject_id FROM grade_subject WHERE grade_id='$grade_id'";
+		$res=mysqli_query($con, $quer);
+		if(!$res) {
+			die("Query Failed!".mysqli_error($con));
+		}
+		
+		//----------------------------------------------------------------------------------
+		
+		
+		$row = mysqli_fetch_array($student_results);
 		
 			$father_name=$row['father_name'];
 			$student_name=$row['student_name'];
@@ -92,37 +111,21 @@
 		  <div class="name-row">
 		  <?php 
 		  
-		 //--------------------------------------------------------------------------------------------------------
-		 
-		 
-				$stu_sub_query="SELECT subject_id FROM student_subject WHERE student_id='$id'";
-				$stu_sub_res=mysqli_query($con, $stu_sub_query);
-				if(!$stu_sub_res) {
-					die("Query Failed!".mysqli_error($con));
-				}
+		 //--------------------Fetch subjects from student_subject table------------------------------------------
 				
 				$subject_ids=[];
 				while($stu_sub_row=mysqli_fetch_array($stu_sub_res)){
 					$subject_ids[]=$stu_sub_row['subject_id'];
 				}
 				
-				if(!$stu_sub_row){
+				if(!empty($subject_ids)){
 					echo "subjects found";
 				}
 				else {
 					echo "Subjects not found";
 				}
 				
-		//--------------------------------------------------------------------------------------------------------
-		
-		
-			$quer="SELECT subject_id FROM grade_subject WHERE grade_id='$grade_id'";
-		
-			$res=mysqli_query($con, $quer);
-			
-			if(!$res) {
-				die("Query Failed!".mysqli_error($con));
-			}
+		//------------------------Fetch specific subject name from subjects table----------------------------------
 		
 			while($rows=mysqli_fetch_assoc($res)) {
 				$sub_id=$rows['subject_id'];
@@ -134,15 +137,15 @@
 					die("Query Failed!".mysqli_error($con));
 				}
 			
-				while($rows1=mysqli_fetch_assoc($re)) {
+				$rows1=mysqli_fetch_assoc($re);
+				
 					
-			//-------------------------------------------------------------------------------------------------			
+			//----------------------Show specific subject name------------------------------------------------------			
 				?>
 			<div class="check-loop">
 			  <input type="checkbox" id="<?php echo $rows1['subject_name']; ?>" value="<?php echo $rows1['id']; ?>" name="subjects[]" <?php if(in_array($rows['subject_id'], $subject_ids)) { echo "checked"; } ?> />
 			  <label for="<?php echo $rows1['subject_name']; ?>" ><?php echo $rows1['subject_name']; ?></label>
 			</div>
-			<?php } ?>
 			<?php } ?>
 			</div>
 			
