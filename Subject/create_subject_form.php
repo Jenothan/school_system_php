@@ -21,28 +21,28 @@
 		  
 		  <div class="col">
             <label for="subject_index">Subject Index</label>
-            <input type="text" name="subject_index" id="subject_index" required />
+            <input type="text" name="subject_index" id="subject_index" placeholder="eg: 14363" required />
           </div>
         </div>
 		
 		<div class="row">
           <div class="col">
             <label for="subject_order">Subject Order</label>
-            <input type="text" id="subject_order" name="subject_order" required />
+            <input type="text" id="subject_order" name="subject_order" placeholder="eg: 1, 2, 3" required />
           </div>
         </div>
 		
 		<div class="row">
           <div class="col">
             <label for="subject_color">Subject Color</label>
-            <input type="text" id="subject_color" name="subject_color" required />
+            <input type="text" id="subject_color" name="subject_color" placeholder="eg: Green" required />
           </div>
         </div>
 		
 		<div class="row">
           <div class="col">
             <label for="subject_number">Subject Number</label>
-            <input type="text" id="subject_number" name="subject_number" required />
+            <input type="text" id="subject_number" name="subject_number" placeholder="eg: 54" required />
           </div>
         </div>
 

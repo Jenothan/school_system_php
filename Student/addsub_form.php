@@ -9,7 +9,13 @@
         justify-content: center;
         align-items: center;
 	}
+	.button-cell {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
 	</style>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
 <?php 
@@ -51,7 +57,7 @@
 		//----------------------------------------------------------------------------------
 			
 		
-		$quer="SELECT subject_id FROM grade_subject WHERE grade_id='$grade_id'";
+		$quer="SELECT subject_id FROM student_subject WHERE student_id='$id'";
 		$res=mysqli_query($con, $quer);
 		if(!$res) {
 			die("Query Failed!".mysqli_error($con));
@@ -113,8 +119,8 @@
 		  <div class="name-row">
 		  
 		  
-		  <table>
-			<tr>
+		  <table border="1">
+			<tr border=1>
 					<th>Subject ID</th>
 					<th>Subject Name</th>
 			</tr>
@@ -140,14 +146,11 @@
 					die("Query Failed!".mysqli_error($con));
 				}
 			
-				$table_rows=mysqli_fetch_assoc($table_res); ?>
-				<?php if(in_array($table_rows['id'], $subject_ids)) { ?>
+				$table_r=mysqli_fetch_assoc($table_res); ?>
 			<tr>
-				<td><?php echo $table_rows['id']; ?></td>
-				<td><?php echo $table_rows['subject_name']; ?></td>
+				<td><?php echo $table_r['id']; ?></td>
+				<td><div class="button-cell"><?php echo $table_r['subject_name']; ?><a href="subject_delete.php?sub_id="<?php echo $table_r['id']; ?>"&stu_id="<?php echo $id; ?>"><button class="btn btn-danger btn-sm">Delete</button></a></div></td>
 			</tr>
-			
-			<?php } ?>
 		  <?php } ?>
 		  </table>
 	<?php 		 

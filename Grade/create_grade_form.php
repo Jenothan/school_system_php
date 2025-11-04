@@ -16,26 +16,26 @@
         <div class="row">
           <div class="col">
             <label for="grade_name">Grade Name</label>
-            <input type="text" name="grade_name" id="grade_name" required />
+            <input type="text" name="grade_name" id="grade_name" placeholder="eg: 10A" required />
           </div>
 		  
 		  <div class="col">
             <label for="grade_group">Grade Group</label>
-            <input type="text" name="grade_group" id="grade_group" required />
+            <input type="text" name="grade_group" id="grade_group" placeholder="eg: 10" required />
           </div>
         </div>
 		
 		<div class="row">
           <div class="col">
             <label for="grade_color">Grade Color</label>
-            <input type="text" id="grade_color" name="grade_color" required />
+            <input type="text" id="grade_color" name="grade_color" placeholder="eg: Green" required />
           </div>
         </div>
 		
 		<div class="row">
           <div class="col">
             <label for="grade_order">Grade Order</label>
-            <input type="text" id="grade_order" name="grade_order" required />
+            <input type="text" id="grade_order" name="grade_order" placeholder="eg: 1, 2, 3" required />
           </div>
         </div>
 
