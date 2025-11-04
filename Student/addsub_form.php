@@ -35,14 +35,6 @@
 		
 		//----------------------------------------------------------------------------------
 		
-		$quer="SELECT subject_id FROM grade_subject WHERE grade_id='$grade_id'";
-		$res=mysqli_query($con, $quer);
-		if(!$res) {
-			die("Query Failed!".mysqli_error($con));
-		}
-		
-		//----------------------------------------------------------------------------------
-		
 		
 		$row = mysqli_fetch_array($student_results);
 		
@@ -55,6 +47,15 @@
 			$gender=$row['gender']?? "";
 			$telephone=$row['telephone'];
 			$address=$row['address'];
+		
+		//----------------------------------------------------------------------------------
+			
+		
+		$quer="SELECT subject_id FROM grade_subject WHERE grade_id='$grade_id'";
+		$res=mysqli_query($con, $quer);
+		if(!$res) {
+			die("Query Failed!".mysqli_error($con));
+		}
 	
 ?>
 
@@ -110,23 +111,61 @@
           </div>
 		  <input type="hidden" value="<?php echo $id; ?>" name='id'/>
 		  <div class="name-row">
+		  
+		  
+		  <table>
+			<tr>
+					<th>Subject ID</th>
+					<th>Subject Name</th>
+			</tr>
+		  
 		  <?php 
 		  
-		 //--------------------Fetch subjects from student_subject table------------------------------------------
+		  //--------------------Fetch subjects from student_subject table------------------------------------------
 				
 				$subject_ids=[];
 				while($stu_sub_row=mysqli_fetch_array($stu_sub_res)){
 					$subject_ids[]=$stu_sub_row['subject_id'];
 				}
+		
+		  //--------------------Fetch subjects from student_subject table------------------------------------------
+	  
+		  while($table_rows=mysqli_fetch_assoc($res)) {
+				$sub_id=$table_rows['subject_id'];
+				$table_que="SELECT id, subject_name FROM subjects WHERE id='$sub_id'";
+		
+				$table_res=mysqli_query($con, $table_que);
 				
-				if(!empty($subject_ids)){
+				if(!$table_res) {
+					die("Query Failed!".mysqli_error($con));
+				}
+			
+				$table_rows=mysqli_fetch_assoc($table_res); ?>
+				<?php if(in_array($table_rows['id'], $subject_ids)) { ?>
+			<tr>
+				<td><?php echo $table_rows['id']; ?></td>
+				<td><?php echo $table_rows['subject_name']; ?></td>
+			</tr>
+			
+			<?php } ?>
+		  <?php } ?>
+		  </table>
+	<?php 		 
+		 
+				
+				/*if(!empty($subject_ids)){
 					echo "subjects found";
 				}
 				else {
 					echo "Subjects not found";
-				}
+				}*/
 				
 		//------------------------Fetch specific subject name from subjects table----------------------------------
+			$quer="SELECT subject_id FROM grade_subject WHERE grade_id='$grade_id'";
+			$res=mysqli_query($con, $quer);
+			if(!$res) {
+				die("Query Failed!".mysqli_error($con));
+			}
 		
 			while($rows=mysqli_fetch_assoc($res)) {
 				$sub_id=$rows['subject_id'];
@@ -149,6 +188,7 @@
 			</div>
 			<?php } ?>
 			</div>
+			<br>
 			
 		<div class="actions">
           <input type="reset" />

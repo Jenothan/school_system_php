@@ -22,8 +22,7 @@
 			$subject_index=$row['subject_index'];
 			$subject_order=$row['subject_order'];
 			$subject_color=$row['subject_color'];
-			$subject_number=$row['subject_number'];
-	
+			$subject_number=$row['subject_number'];	
 ?>
 
 <div>
