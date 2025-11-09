@@ -6,6 +6,8 @@
 			width: 500px;
 		}
 	</style>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
   </head>
   <body>
   <?php 
@@ -84,6 +86,9 @@
             <label for="address">Address</label>
 			<textarea id="address" name="address" rows="3" required></textarea>
           </div>
+		 </div>
+		 
+		<div class="row">
           <div class="col">
             <label for="phone">Telephone</label>
             <input type="tel" id="phone" name="telephone" required />

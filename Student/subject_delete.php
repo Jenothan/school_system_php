@@ -8,4 +8,5 @@
 			if(!$result){
 				die("query failed".mysqli_error($con));
 			}
+	header("Location: addsub_form.php?id=$stu_id");
 ?>

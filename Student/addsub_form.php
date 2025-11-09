@@ -57,11 +57,7 @@
 		//----------------------------------------------------------------------------------
 			
 		
-		$quer="SELECT subject_id FROM student_subject WHERE student_id='$id'";
-		$res=mysqli_query($con, $quer);
-		if(!$res) {
-			die("Query Failed!".mysqli_error($con));
-		}
+		
 	
 ?>
 
@@ -136,6 +132,12 @@
 		
 		  //--------------------Fetch subjects from student_subject table------------------------------------------
 	  
+		  $quer="SELECT subject_id FROM student_subject WHERE student_id='$id'";
+			$res=mysqli_query($con, $quer);
+			if(!$res) {
+				die("Query Failed!".mysqli_error($con));
+			}
+			
 		  while($table_rows=mysqli_fetch_assoc($res)) {
 				$sub_id=$table_rows['subject_id'];
 				$table_que="SELECT id, subject_name FROM subjects WHERE id='$sub_id'";
@@ -149,7 +151,12 @@
 				$table_r=mysqli_fetch_assoc($table_res); ?>
 			<tr>
 				<td><?php echo $table_r['id']; ?></td>
-				<td><div class="button-cell"><?php echo $table_r['subject_name']; ?><a href="subject_delete.php?sub_id="<?php echo $table_r['id']; ?>"&stu_id="<?php echo $id; ?>"><button class="btn btn-danger btn-sm">Delete</button></a></div></td>
+				<td>
+					<div class="button-cell">
+						<?php echo $table_r['subject_name']; ?>
+						<a href="subject_delete.php?sub_id=<?php echo $table_r['id']; ?>&stu_id=<?php echo $id; ?>" class="btn btn-danger btn-sm">Delete</a>
+					</div>
+				</td>
 			</tr>
 		  <?php } ?>
 		  </table>

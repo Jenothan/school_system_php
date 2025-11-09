@@ -1,6 +1,7 @@
 <html>	
   <head>
     <link rel="stylesheet" href="../global.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
 <?php 
@@ -34,8 +35,23 @@
 
       <form>
         <h1>Student Details</h1>
-	
+		<?php 
+				$img_query="SELECT * FROM images WHERE student_id='$id'";
+				$img_res=mysqli_query($con, $img_query);
+				if(!$img_res){
+					die("query failed" . mysqli_error($con));
+				}
+				$path="../profiles/def";
+				if(mysqli_num_rows($img_res)>0) {
+					$img_row=mysqli_fetch_array($img_res);
+					$path=$img_row['file_name'];
+				}
+			?>
+		
         <div class="name-row">
+			<div class="name-col">
+				<img src='<?php echo $path; ?>' alt='profile image' width=150 height=150 style='border-radius:100%;' /> 
+			</div>
           <div class="name-col">
             <label for="father_name">Father Name:</label>
             <p><?php echo $father_name; ?></p>

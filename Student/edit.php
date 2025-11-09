@@ -6,6 +6,7 @@
 			width: 500px;
 		}
 	</style>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
    <?php $id=$_GET['id']; ?>
@@ -36,9 +37,30 @@
 	?>
 	
     <div class="form">
-      <form action="update.php" method="POST">
+      <form action="update.php" method="POST" enctype="multipart/form-data">
         <h1>Edit Student</h1>
 			<input type='hidden' name='id' id='id' value="<?php echo $id; ?>"/>
+			
+			<?php 
+				$img_query="SELECT * FROM images WHERE student_id='$id'";
+				$img_res=mysqli_query($con, $img_query);
+				if(!$img_res){
+					die("query failed" . mysqli_error($con));
+				}
+				$path="../profiles/def";
+				if(mysqli_num_rows($img_res)>0) {
+					$img_row=mysqli_fetch_array($img_res);
+					$path=$img_row['file_name'];
+				}
+			?>
+		<div style='background-color: #F6F7EB; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 10px; border: 1px solid #ADD2C2; margin-bottom: 10px; gap: 10px;'>
+			<img src='<?php echo $path; ?>' alt='profile image' width=150 height=150 style='border-radius:100%;' /> 
+			
+
+			<a href="delete_img.php?id=<?php echo $id; ?>" class="btn btn-danger">Delete</a>
+		</div>
+			<input type="file" id="file" name="imagefile" accept="image/*" class="form-control" >
+		
         <div class="row">
           <div class="col">
             <label for="father_name">Father Name</label>
@@ -67,7 +89,7 @@
 				
 	<?php
 			$quer="SELECT id, grade_name FROM grade";
-		
+			
 			$res=mysqli_query($con, $quer);
 			
 			if(!$res) {
@@ -107,6 +129,9 @@
             <label for="address">Address</label>
 			<textarea id="address" name="address" rows="3" required><?php echo $address; ?></textarea>
           </div>
+		</div>
+		 
+		<div class="row">
           <div class="col">
             <label for="phone">Telephone</label>
             <input type="tel" id="phone" name="telephone" value="<?php echo $telephone; ?>" required />
