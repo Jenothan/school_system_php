@@ -7,7 +7,8 @@
 		<?php 
 			include('../auth/auth_session.php');
 			require_once('../config.php');
-		
+			
+			
 			$query="SELECT * FROM students WHERE deleted_at IS NULL";
 			$result=mysqli_query($con, $query);
 			
@@ -18,20 +19,35 @@
 			<h1>Student Details</h1>
 			<table>
 				<tr>
-					<th>Father Name</th>
-					<th>Student Name</th>
-					<th>Addmission No</th>
-					<th>Grade ID</th>
-					<th>NIC</th>
-					<th>DOB</th>
-					<th>Gender</th>
-					<th>Telephone</th>
-					<th>Address</th>
-					<th>Subjects</th>
-					<th colspan='4'>Actions</th>
+					<th style="width: 40%;">Profile</th>
+					<th style="width: 40%;">Father Name</th>
+					<th style="width: 40%;">Student Name</th>
+					<th style="width: 40%;">Addmission No</th>
+					<th style="width: 40%;">Grade ID</th>
+					<th style="width: 40%;">NIC</th>
+					<th style="width: 40%;">DOB</th>
+					<th style="width: 40%;">Gender</th>
+					<th style="width: 40%;">Telephone</th>
+					<th style="width: 40%;">Address</th>
+					<th style="width: 40%;" colspan='4'>Actions</th>
 				</tr>
 			<?php while($row=mysqli_fetch_array($result)) { ?>
 				<tr>
+					<?php
+					$path="../profiles/def.jpg";
+					$alt="default profile image";
+					$img_query="SELECT file_name, original_name FROM images WHERE student_id='$row[0]'";
+					$img_res=mysqli_query($con, $img_query);
+					if(mysqli_num_rows($img_res)){
+						$img_row=mysqli_fetch_array($img_res);
+						$path=$img_row['file_name'];
+						$alt=$img_row['original_name'];
+					}
+					?>
+					
+					<td>
+						<img src='<?php echo $path; ?>' alt='profile image' width=75 height=75 style='border-radius:100%;' /> 
+					</td>
 					<td><?php echo $row[1]; ?></td>
 					<td><?php echo $row[2]; ?></td>
 					<td><?php echo $row[3]; ?></td>
@@ -54,14 +70,13 @@
 					<td><?php echo $row[7]; ?></td>
 					<td><?php echo $row[8]; ?></td>
 					<td><?php echo $row[9]; ?></td>
-					<td><?php echo $row[9]; ?></td>
-					<td><a href="delete.php?id=<?php echo $row[0]; ?>"><button class="btn btn-danger">Delete</button></a></td>
-					<td><a href="edit.php?id=<?php echo $row[0]; ?>"><button class="btn btn-warning">Edit</button></a></td>
-					<td><a href="show.php?id=<?php echo $row[0]; ?>"><button class="btn btn-success">View</button></a></td>
-					<td><a href="addsub_form.php?id=<?php echo $row[0]; ?>"><button class="btn btn-primary">Sub</button></a></td>
+					<td><a href="delete.php?id=<?php echo $row[0]; ?>" class="btn btn-danger">Delete</a></td>
+					<td><a href="edit.php?id=<?php echo $row[0]; ?>" class="btn btn-warning">Edit</a></td>
+					<td><a href="show.php?id=<?php echo $row[0]; ?>" class="btn btn-success">View</a></td>
+					<td><a href="addsub_form.php?id=<?php echo $row[0]; ?>" class="btn btn-primary">Sub</a></td>
 				</tr>
 			<?php } ?>
 			</table>
-			<a href="Create_Form.php"><button class="btn btn-success">Add Student</button></a>
+			<a href="Create_Form.php" class="btn btn-success">Add Student</a>
 	</body>
 </html>

@@ -3,29 +3,26 @@
 	if($_SERVER['REQUEST_METHOD']=='POST'){
 			$id=$_POST['id'];
 			$subjects=$_POST['subjects'];
-			
+			print_r($subjects);
 			require_once('../config.php');
 			
-			if(!empty($subjects)){
-				$que= "DELETE FROM student_subject WHERE student_id=$id";
-					$res = mysqli_query($con,$que);
-					
-					if(!$res){
-						die("query failed".mysqli_error($con));
-					}
+			$stu_query="SELECT subject_id FROM student_subject WHERE student_id='$id'";
+			$stu_res=mysqli_query($con, $stu_query);
+			if(!$stu_res) {
+				die("query failed!" . mysqli_error($con));
 			}
-			
+				
+				$sub_ids=[];
+			while($stu_row=mysqli_fetch_array($stu_res)) {
+				$sub_ids[]=$stu_row['subject_id'];
+				}
+				
 			foreach($subjects as $subject) {
-				$query="INSERT INTO student_subject (student_id, subject_id) VALUES ('$id', '$subject')";
-			
-				$result=mysqli_query($con,$query);
-			
-				if(!$result){
-					echo mysqli_error($con);
+				if(!in_array($subject, $sub_ids)) {
+					$sub_query="INSERT INTO student_subject (student_id, subject_id) VALUES ('$id', '$subject')";
+					$sub_res=mysqli_query($con, $sub_query);
 				}
 			}
-			
-			
-			header('location:index.php');
+			header('location:addsub_form.php?id='.$id);
 	}
 ?>

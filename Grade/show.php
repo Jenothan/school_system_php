@@ -10,10 +10,10 @@
 
 		$query="SELECT * FROM grade WHERE id='$id'";
 		
-		$results=mysqli_query($conn, $query );
+		$results=mysqli_query($con, $query );
 		
 		if(!$results){
-			echo mysqli_error($conn);
+			echo mysqli_error($con);
 		}
 		
 		$row = mysqli_fetch_array($results);
