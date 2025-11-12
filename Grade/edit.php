@@ -8,11 +8,11 @@
 	</style>
   </head>
   <body>
-  <?php include('../auth/auth_session.php'); ?>
+  <?php //include('../auth/auth_session.php'); ?>
    <?php $id=$_GET['id']; ?>
    
 	<?php 
-		require_once('../config.php');
+		//require_once('../config.php');
 		
 		$error=$_GET['e'] ?? 0;
 		$error_msg="Grade Name already exist!";
@@ -34,7 +34,7 @@
 		
 	?>
     <div class="form">
-      <form action="update.php" method="POST">
+      <form action="grade/update.php" method="POST">
         <h1>Edit Grade</h1>
 		
 		<?php if($error==1) { ?>

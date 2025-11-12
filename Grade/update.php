@@ -8,10 +8,10 @@
 			
 			require_once('../config.php');
 			
-			$check_query="SELECT grade_name FROM grades";
+			$check_query="SELECT grade_name FROM grades WHERE id != '$id'";
 			$check_res=mysqli_query($con, $check_query);
 			if(!$check_res){
-				die("query error!" . mysqli_error($check_res));
+				die("query error!" . mysqli_error($con));
 			}
 			
 			$grade_names=[];
@@ -20,11 +20,11 @@
 			}
 			
 			if(in_array($grade_name, $grade_names)) {
-				header('location:edit.php?e=1');
+				header('location:../index.php?section=grade&page=edit&e=1');
 				exit();
 			}
 			else {
-				$query = "UPDATE grades SET grade_name = '$grade_name', grade_group = '$grade_group', grade_color = '$grade_color', grade_order = '$grade_order'";	
+				$query = "UPDATE grades SET grade_name = '$grade_name', grade_group = '$grade_group', grade_color = '$grade_color', grade_order = '$grade_order'  WHERE id = '$id'";	
 			
 				$result=mysqli_query($con,$query);
 			
@@ -32,7 +32,8 @@
 					die("Query failed".mysqli_error($con));
 				}
 				
-				header('location:index.php');
+				header('location:../index.php?section=grade&page=index');
+				exit();
 			}
 	}
 ?>

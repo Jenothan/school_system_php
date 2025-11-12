@@ -9,12 +9,12 @@
   </head>
   <body>
   <?php 
-		include('../auth/auth_session.php');
+		//include('../auth/auth_session.php');
 		$error=$_GET['e'] ?? 0;
 		$error_msg="Grade Name already exist!";
   ?>
     <div class="form">
-      <form action="store.php" method="POST">
+      <form action="grade/store.php" method="POST">
         <h1>Create Grade</h1>
 		
 		<?php if($error==1) { ?>

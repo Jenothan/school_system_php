@@ -1,42 +1,70 @@
 <html>
-	<head>
-	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	</head>
-	<body class="bg-light">
-	<?php include('auth/auth_session.php'); ?>
 
+<head>
+	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	  <!-- <link rel="stylesheet" href="../global.css"> -->
+</head>
 
-	  <!--<header class="bg-secondary text-white text-center py-3">
-		<h1>School Data</h1>-->
-	  </header>
+<body class="bg-light">
+	<?php
+	include('auth/auth_session.php');
+	require_once('./config.php');
+	if (isset($_GET['page'])) {
+		$page = $_GET['page'];
+	} else {
+		$page = "index";
+	}
 
-	  <div class="container-fluid">
-		<div class="row">
+	//--------------- get folder name ---------------------------------
 
-		 
-		  <aside class="col-md-3 col-lg-2 bg-dark text-white p-3 min-vh-100">
-		  <h2>Menu</h2>
-			<hr>
-			<ul class="nav flex-column">
-			  <li class="nav-item"><a href="grade/index.php" target="iframe_a" class="nav-link text-white">Grade</a></li>
-			  <li class="nav-item"><a href="student/index.php" target="iframe_a" class="nav-link text-white">Students</a></li>
-			  <li class="nav-item"><a href="subject/index.php" target="iframe_a" class="nav-link text-white">Subjects</a></li>
-			</ul>
-			<a href="auth/logout.php"><button class="btn btn-warning">Logout</button></a>
-		  </aside>
+	if (isset($_GET['section'])) {
+		$sec = $_GET['section'];
+	} else {
+		$sec = "grade";
+	}
 
-		  <main class="col-md-9 col-lg-10">
-			
-				<iframe src="grade/index.php" name="iframe_a" title="contents" height="100%" width="100%"></iframe>
-			
-		  </main>
+	//--------------- path identifying ----------------------------------
 
-		</div>
-	  </div>
-	  
-	  <!--<footer class="bg-secondary text-white text-center py-3 mt-auto">
-		<p>All Rights Reserved</p>
-	  </footer>-->
-  
-	</body>
+	if (!isset($_GET['section'])) {
+		$path = $page . ".php";
+	} else {
+		$path = $sec . "/" . $page . ".php";
+	}
+
+	
+	?>
+
+	<table style="width: 100%; height: 100%;" border="1">
+		<tr style="height: 10%;" class="navbar navbar-dark bg-dark fixed-top">
+			<th colspan="2" style="width: 100%;"><?php echo ucfirst($sec); ?></th>
+		</tr>
+		<tr style="height: 80%;">
+			<td style="width: 20%;" class="sidebar">
+				<h2>Menu</h2>
+				<hr>
+				<ul class="nav flex-column gap-2">
+					<li class="nav-item"><a href="?section=grade&page=index" target="iframe_a" class="nav-link">Grade</a></li>
+					<li class="nav-item"><a href="?section=student&page=index" target="iframe_a" class="nav-link">Students</a></li>
+					<li class="nav-item"><a href="?section=subject&page=index" target="iframe_a" class="nav-link">Subjects</a></li>
+				</ul>
+				<a href="auth/logout.php"><button class="btn btn-warning">Logout</button></a>
+			</td>
+			<td style="width: 80%;" class="container">
+				<?php 
+					//---------------- include file path -----------------------------------
+
+						if (file_exists($path)) {
+							include_once($path);
+						} else {
+							echo "<h1>404 page not found</h1>";
+						}
+				?>
+			</td>
+		</tr>
+		<tr style="height: 10%;">
+			<td colspan="2" style="width: 100%;">Footer</td>
+		</tr>
+	</table>
+</body>
+
 </html>

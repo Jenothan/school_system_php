@@ -1,9 +1,4 @@
-<html>
-	<head>
-		<link rel='stylesheet' href='../global.css' />
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	</head>
-	<body>
+
 		<?php 
 			include('../auth/auth_session.php');
 			require_once('../config.php');
@@ -52,19 +47,20 @@
 					<td><?php echo $row[2]; ?></td>
 					<td><?php echo $row[3]; ?></td>
 		<?php
-			$quer="SELECT id, grade_name FROM grades";
+			$grade_n=$row[4];
+			$quer="SELECT grade_name FROM grades where id='$grade_n'";
 		
 			$res=mysqli_query($con, $quer);
 			
 			if(!$res) {
 				die("Query Failed!".mysqli_error($con));
 			}
-			while($rows=mysqli_fetch_assoc($res)) { 
-				if($row[4]==$rows['id']){
-			?>
-					<td><?php echo $rows['grade_name']; break;  ?></td>
-			<?php } ?>
-			<?php } ?>
+		
+			$rows=mysqli_fetch_assoc($res);
+		?>
+					<td><?php echo $rows['grade_name'];  ?></td>
+	
+
 					<td><?php echo $row[5]; ?></td>
 					<td><?php echo $row[6]; ?></td>
 					<td><?php echo $row[7]; ?></td>
@@ -79,4 +75,3 @@
 			</table>
 			<a href="Create_Form.php" class="btn btn-success">Add Student</a>
 	</body>
-</html>
