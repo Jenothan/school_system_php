@@ -9,7 +9,11 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
-   <?php $id=$_GET['id']; ?>
+   <?php $id=$_GET['id'];
+		 $error=$_GET['e'] ?? 0;
+		 $error_msg="Student Addmission number or nic already exist!";
+		 
+	?>
    
 	<?php 
 		include('../auth/auth_session.php');
@@ -39,6 +43,13 @@
     <div class="form">
       <form action="update.php" method="POST" enctype="multipart/form-data">
         <h1>Edit Student</h1>
+		
+		<?php if($error==1) { ?>
+			<div class="alert alert-danger" role="alert">
+			  <?php echo $error_msg; ?>
+			</div>
+		<?php } ?>
+		
 			<input type='hidden' name='id' id='id' value="<?php echo $id; ?>"/>
 			
 			<?php 
@@ -57,7 +68,7 @@
 			<img src='<?php echo $path; ?>' alt='profile image' width=150 height=150 style='border-radius:100%;' /> 
 			
 
-			<a href="delete_img.php?id=<?php echo $id; ?>" class="btn btn-danger">Delete</a>
+			<a href="delete_img.php?id=<?php echo $id; ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete?')">Delete</a>
 		</div>
 			<input type="file" id="file" name="imagefile" accept="image/*" class="form-control" >
 		
@@ -88,7 +99,7 @@
 				<option value="" disabled selected>Select your Grade</option>
 				
 	<?php
-			$quer="SELECT id, grade_name FROM grade";
+			$quer="SELECT id, grade_name FROM grades";
 			
 			$res=mysqli_query($con, $quer);
 			

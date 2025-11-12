@@ -1,4 +1,5 @@
 <?php
+	include('../auth/auth_session.php');
 	if($_SERVER['REQUEST_METHOD']=='POST'){
 			$father_name=$_POST['father_name'];
 			$student_name=$_POST['student_name'];
@@ -9,17 +10,29 @@
 			$gender=$_POST['gender'];
 			$telephone=$_POST['telephone'];
 			$address=$_POST['address'];
+			$username=$_SESSION['username'];
 			
 			require_once('../config.php');
 			
-			$query="INSERT INTO students (father_name, student_name, addmission_no, grade_id, nic, dob, gender, telephone, address) VALUES ('$father_name', '$student_name', '$addmission_no', '$grade_id', '$nic', '$dob', '$gender', '$telephone', '$address')";
 			
-			$result=mysqli_query($con,$query);
-		
-			if(!$result){
-				echo mysqli_error($con);
+			
+			$check_query="SELECT addmission_no, nic FROM students WHERE addmission_no='$addmission_no' OR nic='$nic'";
+			$check_res=mysqli_query($con, $check_query);
+			
+			if(mysqli_num_rows($check_res)>0) {
+				header('location:create_form.php?e=1');
+			}
+			else {
+				$query="INSERT INTO students (father_name, student_name, addmission_no, grade_id, nic, dob, gender, telephone, address, created_by) VALUES ('$father_name', '$student_name', '$addmission_no', '$grade_id', '$nic', '$dob', '$gender', '$telephone', '$address', '$username')";
+			
+				$result=mysqli_query($con,$query);
+			
+				if(!$result){
+					echo mysqli_error($con);
+				}
+				
+				header('location:index.php');
 			}
 			
-			header('location:index.php');
 	}
 ?>
