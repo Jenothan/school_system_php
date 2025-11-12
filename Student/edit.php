@@ -11,8 +11,12 @@
   <body>
    <?php $id=$_GET['id'];
 		 $error=$_GET['e'] ?? 0;
+		 if($error == 1) {
 		 $error_msg="Student Addmission number or nic already exist!";
-		 
+		 }
+		 else if($error == 2) {
+			 $error_msg="Image not found!";
+		 }
 	?>
    
 	<?php 
@@ -44,7 +48,7 @@
       <form action="update.php" method="POST" enctype="multipart/form-data">
         <h1>Edit Student</h1>
 		
-		<?php if($error==1) { ?>
+		<?php if($error==1 or $error==2) { ?>
 			<div class="alert alert-danger" role="alert">
 			  <?php echo $error_msg; ?>
 			</div>
