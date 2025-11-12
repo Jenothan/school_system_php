@@ -6,12 +6,36 @@
 			width: 500px;
 		}
 	</style>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
   </head>
   <body>
+  <?php 
+		include('../auth/auth_session.php');
+		require_once('../config.php');
+		
+		$error=$_GET['e'] ?? 0;
+		$error_msg="Student Addmission number or nic already exist!";
+		
+		$query="SELECT id, grade_name FROM grades";
+		
+		$result=mysqli_query($con, $query);
+		
+		if(!$result) {
+			die("Query Failed!".mysqli_error($con));
+		}
+		
+  ?>
     <div class="form">
       <form action="store.php" method="POST">
         <h1>Create Student</h1>
-
+		
+		<?php if($error==1) { ?>
+			<div class="alert alert-danger" role="alert">
+			  <?php echo $error_msg; ?>
+			</div>
+		<?php } ?>
+	
         <div class="row">
           <div class="col">
             <label for="father_name">Father Name</label>
@@ -34,7 +58,13 @@
 		<div class="row">
           <div class="col">
             <label for="grade_id">Grade ID</label>
-            <input type="text" id="grade_id" name="grade_id" required />
+			<select name="grade_id" id="grade_id" required>
+				<option value="" disabled selected>Select your Grade</option>
+				
+			<?php while($row=mysqli_fetch_assoc($result)) { ?>
+				<option value="<?php echo $row['id']; ?>"><?php echo $row['grade_name']; ?></option>
+			<?php } ?>
+			</select>
           </div>
         </div>
 		
@@ -65,6 +95,9 @@
             <label for="address">Address</label>
 			<textarea id="address" name="address" rows="3" required></textarea>
           </div>
+		 </div>
+		 
+		<div class="row">
           <div class="col">
             <label for="phone">Telephone</label>
             <input type="tel" id="phone" name="telephone" required />

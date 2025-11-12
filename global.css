@@ -36,6 +36,7 @@ body {
       input[type="number"],
       input[type="tel"],
       input[type="date"],
+	  select,
 	  textarea
 		{
         width: 100%;
@@ -47,8 +48,8 @@ body {
       }
 
       .name-row {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: auto auto auto;
         gap: 20px;
       }
 

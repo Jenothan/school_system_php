@@ -6,11 +6,21 @@
 			width: 500px;
 		}
 	</style>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
-   <?php $id=$_GET['id']; ?>
+   <?php $id=$_GET['id'];
+		 $error=$_GET['e'] ?? 0;
+		 if($error == 1) {
+		 $error_msg="Student Addmission number or nic already exist!";
+		 }
+		 else if($error == 2) {
+			 $error_msg="Image not found!";
+		 }
+	?>
    
 	<?php 
+		include('../auth/auth_session.php');
 		require_once('../config.php');
 		
 		$query="SELECT * FROM students WHERE id='$id'";
@@ -32,12 +42,40 @@
 			$gender=$row['gender']?? "";
 			$telephone=$row['telephone'];
 			$address=$row['address'];
-		
 	?>
+	
     <div class="form">
-      <form action="update.php" method="POST">
+      <form action="update.php" method="POST" enctype="multipart/form-data">
         <h1>Edit Student</h1>
+		
+		<?php if($error==1 or $error==2) { ?>
+			<div class="alert alert-danger" role="alert">
+			  <?php echo $error_msg; ?>
+			</div>
+		<?php } ?>
+		
 			<input type='hidden' name='id' id='id' value="<?php echo $id; ?>"/>
+			
+			<?php 
+				$img_query="SELECT * FROM images WHERE student_id='$id'";
+				$img_res=mysqli_query($con, $img_query);
+				if(!$img_res){
+					die("query failed" . mysqli_error($con));
+				}
+				$path="../profiles/def";
+				if(mysqli_num_rows($img_res)>0) {
+					$img_row=mysqli_fetch_array($img_res);
+					$path=$img_row['file_name'];
+				}
+			?>
+		<div style='background-color: #F6F7EB; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 10px; border: 1px solid #ADD2C2; margin-bottom: 10px; gap: 10px;'>
+			<img src='<?php echo $path; ?>' alt='profile image' width=150 height=150 style='border-radius:100%;' /> 
+			
+
+			<a href="delete_img.php?id=<?php echo $id; ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete?')">Delete</a>
+		</div>
+			<input type="file" id="file" name="imagefile" accept="image/*" class="form-control" >
+		
         <div class="row">
           <div class="col">
             <label for="father_name">Father Name</label>
@@ -57,10 +95,25 @@
           </div>
         </div>
 		
+		
 		<div class="row">
           <div class="col">
             <label for="grade_id">Grade ID</label>
-            <input type="text" id="grade_id" name="grade_id" value="<?php echo $grade_id; ?>" required />
+			<select name="grade_id" id="grade_id" required>
+				<option value="" disabled selected>Select your Grade</option>
+				
+	<?php
+			$quer="SELECT id, grade_name FROM grades";
+			
+			$res=mysqli_query($con, $quer);
+			
+			if(!$res) {
+				die("Query Failed!".mysqli_error($con));
+			}
+			while($rows=mysqli_fetch_assoc($res)) { ?>
+				<option value="<?php echo $rows['id']; ?>" <?php echo $rows['id']==$grade_id ? 'selected' : ''; ?>><?php echo $rows['grade_name']; ?></option>
+			<?php } ?>
+			</select>
           </div>
         </div>
 		
@@ -91,6 +144,9 @@
             <label for="address">Address</label>
 			<textarea id="address" name="address" rows="3" required><?php echo $address; ?></textarea>
           </div>
+		</div>
+		 
+		<div class="row">
           <div class="col">
             <label for="phone">Telephone</label>
             <input type="tel" id="phone" name="telephone" value="<?php echo $telephone; ?>" required />

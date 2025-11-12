@@ -10,7 +10,7 @@
 		$result=mysqli_query($con, $query);
 		
 		if(!$result) {
-			mysqli_error($con);
+			die("Query failed".mysqli_error($con));
 		}
 		
 		$row=mysqli_num_rows($result);
@@ -18,15 +18,15 @@
 		if($row==1){
 			session_start();
 			$_SESSION['username'] = $username;
-			header('location:welcome.php');
+			header('location:../index.php');
 		}
 		else {
-			
+			header('location:login_form.php');
 			die("Login Failed!");
 		}
 		
 	}
 	else {
-		echo "It's not POST method";
+		echo "Cannot GET method";
 	}
 ?>
