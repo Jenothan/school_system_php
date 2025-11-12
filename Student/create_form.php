@@ -14,7 +14,10 @@
 		include('../auth/auth_session.php');
 		require_once('../config.php');
 		
-		$query="SELECT id, grade_name FROM grade";
+		$error=$_GET['e'] ?? 0;
+		$error_msg="Student Addmission number or nic already exist!";
+		
+		$query="SELECT id, grade_name FROM grades";
 		
 		$result=mysqli_query($con, $query);
 		
@@ -26,7 +29,13 @@
     <div class="form">
       <form action="store.php" method="POST">
         <h1>Create Student</h1>
-
+		
+		<?php if($error==1) { ?>
+			<div class="alert alert-danger" role="alert">
+			  <?php echo $error_msg; ?>
+			</div>
+		<?php } ?>
+	
         <div class="row">
           <div class="col">
             <label for="father_name">Father Name</label>

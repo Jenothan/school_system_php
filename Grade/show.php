@@ -8,7 +8,7 @@
 		$id=$_GET['id'];
 		require_once('../config.php');
 
-		$query="SELECT * FROM grade WHERE id='$id'";
+		$query="SELECT * FROM grades WHERE id='$id'";
 		
 		$results=mysqli_query($con, $query );
 		
@@ -52,6 +52,7 @@
           </div>
 		  
         </div>
+		<a href="edit.php?id=<?php echo $id; ?>" class="btn btn-warning">Edit</a>
       </form>
     </div>
   </body>

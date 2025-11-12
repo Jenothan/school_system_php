@@ -52,7 +52,7 @@
 					<td><?php echo $row[2]; ?></td>
 					<td><?php echo $row[3]; ?></td>
 		<?php
-			$quer="SELECT id, grade_name FROM grade";
+			$quer="SELECT id, grade_name FROM grades";
 		
 			$res=mysqli_query($con, $quer);
 			
@@ -70,7 +70,7 @@
 					<td><?php echo $row[7]; ?></td>
 					<td><?php echo $row[8]; ?></td>
 					<td><?php echo $row[9]; ?></td>
-					<td><a href="delete.php?id=<?php echo $row[0]; ?>" class="btn btn-danger">Delete</a></td>
+					<td><a href="delete.php?id=<?php echo $row[0]; ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete?')">Delete</a></td>
 					<td><a href="edit.php?id=<?php echo $row[0]; ?>" class="btn btn-warning">Edit</a></td>
 					<td><a href="show.php?id=<?php echo $row[0]; ?>" class="btn btn-success">View</a></td>
 					<td><a href="addsub_form.php?id=<?php echo $row[0]; ?>" class="btn btn-primary">Sub</a></td>

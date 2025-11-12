@@ -1,4 +1,5 @@
 <?php
+include('../auth/auth_session.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$id = $_POST['id'];
 	$father_name = $_POST['father_name'];
@@ -10,16 +11,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$gender = $_POST['gender'];
 	$telephone = $_POST['telephone'];
 	$address = $_POST['address'];
+	$username=$_SESSION['username'];
 
 	require_once('../config.php');
+	
+	$check_query="SELECT addmission_no, nic FROM students WHERE (addmission_no='$addmission_no' OR nic='$nic') AND id!='$id'";
+	$check_res=mysqli_query($con, $check_query);
+			
+			if(mysqli_num_rows($check_res)>0) {
+				header('location:edit.php?id='. $id .'&e=1');
+				exit();
+			}
+			else {
 
-	$query = "UPDATE students SET father_name = '$father_name', student_name = '$student_name', addmission_no = '$addmission_no', grade_id = '$grade_id', nic = '$nic', dob = '$dob', gender = '$gender', telephone = '$telephone', address = '$address' WHERE id = '$id'";
+				$query = "UPDATE students SET father_name = '$father_name', student_name = '$student_name', addmission_no = '$addmission_no', grade_id = '$grade_id', nic = '$nic', dob = '$dob', gender = '$gender', telephone = '$telephone', address = '$address', updated_by='$username' WHERE id = '$id'";
 
-	$result = mysqli_query($con, $query);
+				$result = mysqli_query($con, $query);
 
-	if (!$result) {
-		die("Query failed" . mysqli_error($con));
-	}
+				if (!$result) {
+					die("Query failed" . mysqli_error($con));
+				}
+			}
 
 	//*******************************************************************************************************
 
@@ -35,6 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 		if (move_uploaded_file($_FILES['imagefile']['tmp_name'], $targetFile)) {  //upload image in file path
 			$size = (int)$_FILES['imagefile']['size'];
+			$maxSize = 2 * 1024 * 1024;
+
+			if ($size > $maxSize) {
+				die("Image size can't be greater than 2MB!");
+			}
 
 			$query = "INSERT INTO images (student_id, file_name, original_name, mime, size) VALUES ('$id', '$targetFile', '$original_name', '$imageFiletype', '$size')";
 

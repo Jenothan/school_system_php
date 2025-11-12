@@ -14,7 +14,10 @@
 	<?php 
 		require_once('../config.php');
 		
-		$query="SELECT * FROM grade WHERE id='$id'";
+		$error=$_GET['e'] ?? 0;
+		$error_msg="Grade Name already exist!";
+		
+		$query="SELECT * FROM grades WHERE id='$id'";
 		
 		$result=mysqli_query($con, $query);
 		
@@ -33,6 +36,12 @@
     <div class="form">
       <form action="update.php" method="POST">
         <h1>Edit Grade</h1>
+		
+		<?php if($error==1) { ?>
+			<div class="alert alert-danger" role="alert">
+			  <?php echo $error_msg; ?>
+			</div>
+		<?php } ?>
 
         <div class="row">
           <div class="col">

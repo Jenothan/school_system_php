@@ -8,7 +8,7 @@
 			include('../auth/auth_session.php');
 			require_once('../config.php');
 		
-			$query="SELECT * FROM grade WHERE deleted_at IS NULL";
+			$query="SELECT * FROM grades WHERE deleted_at IS NULL";
 			$result=mysqli_query($con, $query);
 			
 			if(!$result){

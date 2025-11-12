@@ -1,5 +1,5 @@
 <?php
-	define('BASE_URL','http://localhost/jenothan/School_Data');
+	define('BASE_URL','http://localhost/jenothan/school-data');
 	session_start();
 
 	if (!isset($_SESSION['username'])) {

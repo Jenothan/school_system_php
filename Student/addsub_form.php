@@ -56,7 +56,10 @@
 		
 		//----------------------------------------------------------------------------------
 			
-		
+		$grade_query="SELECT grade_name FROM grades WHERE id='$grade_id'";
+		$grade_res=mysqli_query($con, $grade_query);
+		$grade_row=mysqli_fetch_array($grade_res);
+		$grade_name=$grade_row['grade_name'];
 		
 	
 ?>
@@ -84,7 +87,7 @@
 
           <div class="name-col">
             <label for="grade_id">Grade ID:</label>
-            <p><?php echo $grade_id; ?></p>
+            <p><?php echo $grade_name; ?></p>
           </div>
 		  
 		  <div class="name-col">
@@ -154,7 +157,7 @@
 				<td>
 					<div class="button-cell">
 						<?php echo $table_r['subject_name']; ?>
-						<a href="subject_delete.php?sub_id=<?php echo $table_r['id']; ?>&stu_id=<?php echo $id; ?>" class="btn btn-danger btn-sm">Delete</a>
+						<a href="subject_delete.php?sub_id=<?php echo $table_r['id']; ?>&stu_id=<?php echo $id; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete?')">Delete</a>
 					</div>
 				</td>
 			</tr>
