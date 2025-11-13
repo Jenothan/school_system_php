@@ -11,7 +11,7 @@
 			$check_query="SELECT subject_name, subject_index FROM subjects";
 			$check_res=mysqli_query($con, $check_query);
 			if(!$check_res){
-				die("query error!" . mysqli_error($check_res));
+				die("query error!" . mysqli_error($con));
 			}
 			
 			$subject_names=[];
@@ -22,7 +22,7 @@
 			}
 			
 			if(in_array($subject_name, $subject_names) or in_array($subject_index, $subject_indexs)) {
-				header('location:create_subject_form.php?e=1');
+				header('location:../index.php?page=create_subject_form&section=subject&e=1');
 				exit();
 			}
 			else {
@@ -35,7 +35,7 @@
 					echo mysqli_error($con);
 				}
 				
-				header('location:index.php');
+				header('location:../index.php?page=index&section=subject');
 			}
 			
 			

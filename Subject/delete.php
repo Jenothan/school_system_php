@@ -3,7 +3,7 @@
 			
 			require_once('../config.php');
 			
-			$query = "UPDATE subjects SET deleted_at=NOW() WHERE id='$id'";	
+			$query = "DELETE FROM subjects WHERE id='$id'";	
 			
 			$result=mysqli_query($con,$query);
 		
@@ -11,6 +11,6 @@
 				die("Query failed".mysqli_error($con));
 			}
 			
-			header('location:index.php');
+			header('location:../index.php?section=subject&page=index');
 	
 ?>

@@ -1,13 +1,13 @@
 <html>	
   <head>
-    <link rel="stylesheet" href="../global.css">
+    <!-- <link rel="stylesheet" href="../global.css"> -->
 	
   </head>
   <body>
 <?php 
-		include('../auth/auth_session.php');
+		// include('../auth/auth_session.php');
 		$id=$_GET['id'];
-		require_once('../config.php');
+		// require_once('../config.php');
 
 		$query="SELECT * FROM subjects WHERE id='$id'";
 		
@@ -86,7 +86,7 @@
           </div>
 		  
         </div>
-		<a href="edit.php?id=<?php echo $id; ?>" class="btn btn-warning">Edit</a>
+		<a href="?page=edit&section=subject&id=<?php echo $id; ?>" class="btn btn-warning">Edit</a>
       </form>
     </div>
   </body>

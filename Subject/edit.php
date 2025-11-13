@@ -1,17 +1,17 @@
 <html>
   <head>
-    <link rel="stylesheet" href="../global.css">
+    <!-- <link rel="stylesheet" href="../global.css">
 	<style>
 		.form {
 			width: 500px;
 		}
-	</style>
+	</style> -->
   </head>
   <body>
 	<?php 
-		include('../auth/auth_session.php');
+		// include('../auth/auth_session.php');
 		$id=$_GET['id'];
-		require_once('../config.php');
+		// require_once('../config.php');
 		
 		$error=$_GET['e'] ?? 0;
 		$error_msg="Subject Name or Index already exist!";
@@ -34,7 +34,7 @@
 		
 	?>
     <div class="form">
-      <form action="update.php" method="POST">
+      <form action="subject/update.php" method="POST">
         <h1>Create Subjects</h1>
 		
 		<?php if($error==1) { ?>
