@@ -1,7 +1,7 @@
 <html>
 
 <head>
-	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 	  <!-- <link rel="stylesheet" href="../global.css"> -->
 </head>
 
@@ -9,6 +9,7 @@
 	<?php
 	include('auth/auth_session.php');
 	require_once('./config.php');
+
 	if (isset($_GET['page'])) {
 		$page = $_GET['page'];
 	} else {
@@ -25,18 +26,16 @@
 
 	//--------------- path identifying ----------------------------------
 
-	if (!isset($_GET['section'])) {
-		$path = $page . ".php";
-	} else {
-		$path = $sec . "/" . $page . ".php";
-	}
+	
+		$path = $sec."/".$page.".php";
+	
 
 	
 	?>
 
 	<table style="width: 100%; height: 100%;" border="1">
 		<tr style="height: 10%;" class="navbar navbar-dark bg-dark fixed-top">
-			<th colspan="2" style="width: 100%;"><?php echo ucfirst($sec); ?></th>
+			<th colspan="2" style="width: 100%;"><?php echo ucfirst($sec). "     ";  echo ucfirst($page); ?></th>
 		</tr>
 		<tr style="height: 80%;">
 			<td style="width: 20%;" class="sidebar">
@@ -49,7 +48,7 @@
 				</ul>
 				<a href="auth/logout.php"><button class="btn btn-warning">Logout</button></a>
 			</td>
-			<td style="width: 80%;" class="container">
+			<td style="width: 80%;">
 				<?php 
 					//---------------- include file path -----------------------------------
 

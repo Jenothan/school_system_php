@@ -1,7 +1,7 @@
 
 		<?php 
-			include('../auth/auth_session.php');
-			require_once('../config.php');
+			// include('../auth/auth_session.php');
+			// require_once('../config.php');
 			
 			
 			$query="SELECT * FROM students WHERE deleted_at IS NULL";
@@ -29,13 +29,13 @@
 			<?php while($row=mysqli_fetch_array($result)) { ?>
 				<tr>
 					<?php
-					$path="../profiles/def.jpg";
+					$path="profiles/def.jpg";
 					$alt="default profile image";
 					$img_query="SELECT file_name, original_name FROM images WHERE student_id='$row[0]'";
 					$img_res=mysqli_query($con, $img_query);
 					if(mysqli_num_rows($img_res)){
 						$img_row=mysqli_fetch_array($img_res);
-						$path=$img_row['file_name'];
+						$path=substr($img_row['file_name'], 3);
 						$alt=$img_row['original_name'];
 					}
 					?>
@@ -66,10 +66,10 @@
 					<td><?php echo $row[7]; ?></td>
 					<td><?php echo $row[8]; ?></td>
 					<td><?php echo $row[9]; ?></td>
-					<td><a href="delete.php?id=<?php echo $row[0]; ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete?')">Delete</a></td>
-					<td><a href="edit.php?id=<?php echo $row[0]; ?>" class="btn btn-warning">Edit</a></td>
-					<td><a href="show.php?id=<?php echo $row[0]; ?>" class="btn btn-success">View</a></td>
-					<td><a href="addsub_form.php?id=<?php echo $row[0]; ?>" class="btn btn-primary">Sub</a></td>
+					<td><a href="student/delete.php?id=<?php echo $row[0]; ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete?')">Delete</a></td>
+					<td><a href="?section=student&page=edit&id=<?php echo $row[0]; ?>" class="btn btn-warning">Edit</a></td>
+					<td><a href="?section=student&page=show&id=<?php echo $row[0]; ?>" class="btn btn-success">View</a></td>
+					<td><a href="?section=student&page=addsub_form&id=<?php echo $row[0]; ?>" class="btn btn-primary">Sub</a></td>
 				</tr>
 			<?php } ?>
 			</table>

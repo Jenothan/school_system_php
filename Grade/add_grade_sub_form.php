@@ -37,7 +37,7 @@
 
 <div>
 
-      <form action="add_grade_sub.php" method="POST">
+      <form action="grade/add_grade_sub.php" method="POST">
         <h1>Student Details</h1>
 	
         <div class="name-row">

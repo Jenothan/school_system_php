@@ -6,13 +6,13 @@
 			width: 500px;
 		}
 	</style>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
   </head>
   <body>
   <?php 
-		include('../auth/auth_session.php');
-		require_once('../config.php');
+		// include('../auth/auth_session.php');
+		// require_once('../config.php');
 		
 		$error=$_GET['e'] ?? 0;
 		$error_msg="Student Addmission number or nic already exist!";
@@ -27,7 +27,7 @@
 		
   ?>
     <div class="form">
-      <form action="store.php" method="POST">
+      <form action="student/store.php" method="POST">
         <h1>Create Student</h1>
 		
 		<?php if($error==1) { ?>

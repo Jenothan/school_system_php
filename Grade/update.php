@@ -20,7 +20,7 @@
 			}
 			
 			if(in_array($grade_name, $grade_names)) {
-				header('location:../index.php?section=grade&page=edit&e=1');
+				header('location:../index.php?section=grade&page=edit&id=' . $id . '&e=1');
 				exit();
 			}
 			else {

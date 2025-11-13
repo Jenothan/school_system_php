@@ -1,7 +1,7 @@
 <!-- addsub_form.php -->
 <html>	
   <head>
-    <link rel="stylesheet" href="../global.css">
+    <!-- <link rel="stylesheet" href="../global.css">
 	<style>
 	.check-loop {
 		display: flex;
@@ -14,14 +14,14 @@
 		flex-direction: row;
 		justify-content: space-between;
 	}
-	</style>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	</style> -->
+	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
   </head>
   <body>
 <?php 
-		include('../auth/auth_session.php');
+		// include('../auth/auth_session.php');
 		$id=$_GET['id'];
-		require_once('../config.php');
+		// require_once('../config.php');
 		
 		//---------------------------------------------------------------------------------
 
@@ -66,7 +66,7 @@
 
 <div>
 
-      <form action="addsub.php" method="POST">
+      <form action="student/addsub.php" method="POST">
         <h1>Student Details</h1>
 	
         <div class="name-row">
@@ -157,7 +157,7 @@
 				<td>
 					<div class="button-cell">
 						<?php echo $table_r['subject_name']; ?>
-						<a href="subject_delete.php?sub_id=<?php echo $table_r['id']; ?>&stu_id=<?php echo $id; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete?')">Delete</a>
+						<a href="student/subject_delete.php?sub_id=<?php echo $table_r['id']; ?>&stu_id=<?php echo $id; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete?')">Delete</a>
 					</div>
 				</td>
 			</tr>

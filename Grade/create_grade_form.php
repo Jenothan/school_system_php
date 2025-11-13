@@ -1,6 +1,6 @@
 <html>
   <head>
-    <link rel="stylesheet" href="../global.css">
+    <!-- <link rel="stylesheet" href="../global.css"> -->
 	<style>
 		.form {
 			width: 500px;
@@ -12,6 +12,10 @@
 		//include('../auth/auth_session.php');
 		$error=$_GET['e'] ?? 0;
 		$error_msg="Grade Name already exist!";
+    $path="/jenothan/school-data/grade/create_grade_form.php";
+    if($_SERVER['PHP_SELF']==$path) {
+      include('../auth/auth_session.php');
+    }
   ?>
     <div class="form">
       <form action="grade/store.php" method="POST">

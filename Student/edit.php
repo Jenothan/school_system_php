@@ -1,12 +1,12 @@
 <html>
   <head>
-    <link rel="stylesheet" href="../global.css">
-	<style>
+    <!-- <link rel="stylesheet" href="../global.css"> -->
+	<!-- <style>
 		.form {
 			width: 500px;
 		}
-	</style>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	</style> -->
+	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
   </head>
   <body>
    <?php $id=$_GET['id'];
@@ -20,8 +20,8 @@
 	?>
    
 	<?php 
-		include('../auth/auth_session.php');
-		require_once('../config.php');
+		// include('../auth/auth_session.php');
+		// require_once('../config.php');
 		
 		$query="SELECT * FROM students WHERE id='$id'";
 		
@@ -45,7 +45,7 @@
 	?>
 	
     <div class="form">
-      <form action="update.php" method="POST" enctype="multipart/form-data">
+      <form action="student/update.php" method="POST" enctype="multipart/form-data">
         <h1>Edit Student</h1>
 		
 		<?php if($error==1 or $error==2) { ?>
@@ -62,17 +62,17 @@
 				if(!$img_res){
 					die("query failed" . mysqli_error($con));
 				}
-				$path="../profiles/def";
+				$path="profiles/def.jpg";
 				if(mysqli_num_rows($img_res)>0) {
 					$img_row=mysqli_fetch_array($img_res);
-					$path=$img_row['file_name'];
+					$path=substr($img_row['file_name'],3);
 				}
 			?>
 		<div style='background-color: #F6F7EB; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 10px; border: 1px solid #ADD2C2; margin-bottom: 10px; gap: 10px;'>
 			<img src='<?php echo $path; ?>' alt='profile image' width=150 height=150 style='border-radius:100%;' /> 
 			
 
-			<a href="delete_img.php?id=<?php echo $id; ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete?')">Delete</a>
+			<a href="student/delete_img.php?id=<?php echo $id; ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete?')">Delete</a>
 		</div>
 			<input type="file" id="file" name="imagefile" accept="image/*" class="form-control" >
 		

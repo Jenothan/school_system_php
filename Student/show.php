@@ -1,13 +1,13 @@
 <html>	
   <head>
-    <link rel="stylesheet" href="../global.css">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="../global.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
   </head>
   <body>
 <?php 
-		include('../auth/auth_session.php');
+		// include('../auth/auth_session.php');
 		$id=$_GET['id'];
-		require_once('../config.php');
+		// require_once('../config.php');
 
 		$query="SELECT * FROM students WHERE id='$id'";
 		
@@ -131,7 +131,7 @@
           </div>
 		  
         </div>
-		<a href="edit.php?id=<?php echo $id; ?>" class="btn btn-warning">Edit</a>
+		<a href="?section=student&page=edit&id=<?php echo $id; ?>" class="btn btn-warning">Edit</a>
       </form>
     </div>
   </body>

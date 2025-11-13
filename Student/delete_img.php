@@ -26,10 +26,10 @@
 			die("query failed" . mysqli_error($con));
 		}
 
-        header('location:edit.php?id=' . $id);	
+        header('location:../index.php?page=edit&section=student&id=' . $id);	
 		exit();
 	} else {
-			header('location:edit.php?id=' . $id . '&e=2');	
+			header('location:../index.php?page=edit&section=student&id=' . $id . '&e=2');	
 	}
 				
 ?>

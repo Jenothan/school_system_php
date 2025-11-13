@@ -20,7 +20,7 @@
 			$check_res=mysqli_query($con, $check_query);
 			
 			if(mysqli_num_rows($check_res)>0) {
-				header('location:create_form.php?e=1');
+				header('location:../index.php?page=create_form&section=student&e=1');
 			}
 			else {
 				$query="INSERT INTO students (father_name, student_name, addmission_no, grade_id, nic, dob, gender, telephone, address, created_by) VALUES ('$father_name', '$student_name', '$addmission_no', '$grade_id', '$nic', '$dob', '$gender', '$telephone', '$address', '$username')";
@@ -31,7 +31,7 @@
 					echo mysqli_error($con);
 				}
 				
-				header('location:index.php');
+				header('location:../index.php?page=index&section=student');
 			}
 			
 	}

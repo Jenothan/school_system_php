@@ -20,6 +20,6 @@
 				die("query error!" . mysqli_error($con));
 			}
 			
-			header('location:index.php');
+			header('location:../index.php?section=student&page=index');
 	
 ?>
