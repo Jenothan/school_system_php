@@ -2,7 +2,8 @@
 <?php 
     $id = $_GET['id'];
 
-    // Fetch student info
+    //-------------------------------------------- fetch student info ------------------------------------------
+
     $query = "SELECT * FROM students WHERE id='$id'";
     $results = mysqli_query($con, $query);
     if(!$results) die(mysqli_error($con));
@@ -18,13 +19,15 @@
     $telephone = $row['telephone'];
     $address = $row['address'];
 
-    // Get grade name
+    //--------------------------------------------- get grade name ------------------------------------------------
+
     $grade_query = "SELECT grade_name FROM grades WHERE id='$grade_id'";
     $grade_res = mysqli_query($con, $grade_query);
     $grade_row = mysqli_fetch_array($grade_res);
     $grade_name = $grade_row['grade_name'];
 
-    // Get profile image
+    //-------------------------------------------- get profile image ------------------------------------------------
+
     $img_query = "SELECT * FROM images WHERE student_id='$id'";
     $img_res = mysqli_query($con, $img_query);
     $path = "profiles/def.jpg";
@@ -33,7 +36,8 @@
         $path = substr($img_row['file_name'], 3);
     }
 
-    // Get subjects
+    //------------------------------------------- get subjects -----------------------------------------------
+
     $subject_ids = [];
     $subject_query = "SELECT subject_id FROM student_subject WHERE student_id='$id'";
     $subject_res = mysqli_query($con, $subject_query);
@@ -51,8 +55,11 @@
     <h1 class="text-3xl font-bold mb-6 text-center">Student Details</h1>
 
     <div class="flex justify-center mb-6">
-        <img src="<?php echo $path; ?>" alt="profile image" class="w-36 h-36 rounded-full object-cover border border-[#ADD2C2]">
+		<button command="show-modal" commandfor="dialog" >
+        	<img src="<?php echo $path; ?>" alt="profile image" class="w-36 h-36 rounded-full object-cover border border-[#ADD2C2]">
+		</button>
     </div>
+	
 
     <table class="w-full border border-[#387281] rounded">
         <tr class="bg-[#3C7A89] text-white">
@@ -108,4 +115,19 @@
                   text-black font-semibold rounded-[10px]">Edit</a>
     </div>
 </div>
+
+<el-dialog>
+  <dialog id="dialog" aria-labelledby="dialog-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
+    <el-dialog-backdrop class="fixed inset-0 bg-gray-900/50 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"></el-dialog-backdrop>
+
+    <div tabindex="0" class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0">
+      <el-dialog-panel class="relative transform overflow-hidden rounded-lg bg-gray-800 text-left shadow-xl outline -outline-offset-1 outline-white/10 transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
+        <img src="<?php echo $path; ?>" alt="profile image" class="w-100 h-100 rounded-lg object-cover border border-[#ADD2C2]">
+        <div class="bg-gray-700/25 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <button type="button" command="close" commandfor="dialog" class="mt-3 inline-flex w-full justify-center rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20 sm:mt-0 sm:w-auto">Cancel</button>
+        </div>
+      </el-dialog-panel>
+    </div>
+  </dialog>
+</el-dialog>
 </body>

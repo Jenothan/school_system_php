@@ -42,7 +42,7 @@
 					?>
 					<td class="px-3 py-2 flex justify-center w-[100px]">
 						<img src="<?php echo $path; ?>" alt="<?php echo $alt; ?>"
-							class="w-16 h-16 rounded-full">
+							class="w-16 h-16 rounded-full object-cover">
 					</td>
 
 					<td class="px-3 py-2"><?php echo $row['father_name']; ?></td>
