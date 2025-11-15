@@ -4,7 +4,9 @@
     $id = $_GET['id'];
     $error = $_GET['e'] ?? 0;
     if($error == 1) $error_msg = "Student Admission number or NIC already exist!";
-    else if($error == 2) $error_msg = "Image not found!";
+    else if($error == 2) $error_msg = "Image type not acceptable!";
+    else if($error == 3) $error_msg = "Image size grater thaan 2MB";
+    else if($error == 4) $error_msg = "Image not found!";
 
     // Get student info
     $query = "SELECT * FROM students WHERE id='$id'";
@@ -49,7 +51,14 @@
     <div class="flex flex-col items-center mb-6">
 
 		<img src="<?php echo $path; ?>" alt="profile image" class="w-36 h-36 rounded-full mb-4 border-2 border-[#ADD2C2] object-cover">
-
+		<script>
+			function checkSize(file){
+				if (file.files[0].size > 2 * 1024 * 1024){
+					alert("Max 2MB allowed!");
+					file.value = "";
+				}
+			}
+		</script>
 	
 		<div class="flex flex-row items-center justify-center pl-20 gap-4">
 			

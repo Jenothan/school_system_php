@@ -39,6 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$original_name = basename($_FILES['imagefile']['name']);
 	$targetFile = $target_dir . basename($_FILES['imagefile']['name']);
 	$imageFiletype = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+	$size = (int)$_FILES['imagefile']['size'];
+			$maxSize = 2 * 1024 * 1024;
+			echo $size;
+			echo $maxSize;
+
 	$allowedtype = ['jpeg', 'jpg', 'png', 'gif'];
 
 
@@ -46,11 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		//print_r($_FILES);
 
 		if (move_uploaded_file($_FILES['imagefile']['tmp_name'], $targetFile)) {  //upload image in file path
-			$size = (int)$_FILES['imagefile']['size'];
-			$maxSize = 2 * 1024 * 1024;
-
 			if ($size > $maxSize) {
-				die("Image size can't be greater than 2MB!");
+				header('location:../index.php?page=edit&section=student&e=3&id=' . $id);
+				exit();
 			}
 
 			$query = "INSERT INTO images (student_id, file_name, original_name, mime, size) VALUES ('$id', '$targetFile', '$original_name', '$imageFiletype', '$size')";
@@ -74,11 +77,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				die("query failed" . mysqli_error($con));
 			}
 		} else {
-			echo "image not uploaded!";
+			header('location:../index.php?page=edit&section=student&e=4&id=' . $id);
+			exit();
 		}
 	} else {
-		echo "file type not accepted";
+		header('location:../index.php?page=edit&section=student&e=2&id=' . $id);
+		exit();
 	}
 
 	header('location:../index.php?page=edit&section=student&id=' . $id);
+	exit();
 }
