@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$check_res=mysqli_query($con, $check_query);
 			
 			if(mysqli_num_rows($check_res)>0) {
-				header('location:edit.php?id='. $id .'&e=1');
+				header('location:../index.php?page=edit&section=student&id='. $id .'&e=1');
 				exit();
 			}
 			else {
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	//*******************************************************************************************************
 
-	$target_dir = "../profiles/";
+	$target_dir ="../profiles/";
 	$original_name = basename($_FILES['imagefile']['name']);
 	$targetFile = $target_dir . basename($_FILES['imagefile']['name']);
 	$imageFiletype = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
@@ -80,5 +80,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		echo "file type not accepted";
 	}
 
-	header('location:edit.php?id=' . $id);
+	header('location:../index.php?page=edit&section=student&id=' . $id);
 }

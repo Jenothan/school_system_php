@@ -1,8 +1,8 @@
 body {
         font-family: Arial, sans-serif;
-        background-color: #f9ecd9;
+        background-color: #E4D3DC;
         display: flex;
-		flex-direction: column;
+		    flex-direction: column;
         justify-content: start;
         align-items: center;
         min-height: 100vh;
@@ -11,7 +11,7 @@ body {
       }
 
       form {
-        border: 3px solid green;
+        border: 3px solid #387281;
         background: #fff;
         width: 100%;
         max-width: 1000px;

@@ -1,13 +1,6 @@
-<html>
-	<head>
-		<link rel='stylesheet' href='../global.css' />
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	</head>
+
 	<body>
 		<?php 
-			include('../auth/auth_session.php');
-			require_once('../config.php');
-		
 			$query="SELECT * FROM grades WHERE deleted_at IS NULL";
 			$result=mysqli_query($con, $query);
 			
@@ -15,29 +8,44 @@
 				die(mysqli_error($con));
 			}
 		?>
-			<h1>Grade Details</h1>
-			<table>
-				<tr>
-					<th style="padding: 8px;">Grade Name</th>
-					<th>Grade Group</th>
-					<th>Grade Color</th>
-					<th>Grade Order</th>
-					<th colspan='4'>Actions</th>
-				</tr>
-			<?php while($row=mysqli_fetch_array($result)) { ?>
-				<tr>
-					<td><?php echo $row[1]; ?></td>
-					<td><?php echo $row[2]; ?></td>
-					<td><?php echo $row[3]; ?></td>
-					<td><?php echo $row[4]; ?></td>
-					<td><a href="delete.php?id=<?php echo $row[0]; ?>" onclick="return confirm('Do you want to delete?')"><button class="btn btn-danger">Delete</button></a></td>
-					<td><a href="edit.php?id=<?php echo $row[0]; ?>"><button class="btn btn-warning">Edit</button></a></td>
-					<td><a href="show.php?id=<?php echo $row[0]; ?>"><button class="btn btn-info">View</button></a></td>
-					<td><a href="add_grade_sub_form.php?id=<?php echo $row[0]; ?>"><button class="btn btn-primary">Add Sub</button></a></td>
-				</tr>
-			<?php } ?>
-			</table>
-						<a href="create_grade_form.php"><button class="btn btn-success" style="width: 200px; padding: 10px; background-color: green; border-radius: 10px; cursor: pointer; color: white;">Add Grade</button></a>
+			<table class="min-w-full border border-gray-300 rounded-lg overflow-hidden">
+				<thead class="bg-gray-100">
+					<tr>
+						<th class="px-4 py-2 text-left border-b">Grade Name</th>
+						<th class="px-4 py-2 text-left border-b">Grade Group</th>
+						<th class="px-4 py-2 text-left border-b">Grade Color</th>
+						<th class="px-4 py-2 text-left border-b">Grade Order</th>
+						<th class="px-4 py-2 text-center border-b" colspan="4">Actions</th>
+					</tr>
+				</thead>
 
+				<tbody>
+					<?php while($row=mysqli_fetch_array($result)) { ?>
+					<tr class="hover:bg-gray-200 transition cursor-pointer" onclick="window.location='?page=show&section=grade&id=<?php echo $row['id']; ?>'">
+						<td class="px-4 py-2 border-b"><?php echo $row['grade_name']; ?></td>
+						<td class="px-4 py-2 border-b"><?php echo $row['grade_group']; ?></td>
+						<td class="px-4 py-2 border-b"><?php echo $row['grade_color']; ?></td>
+						<td class="px-4 py-2 border-b"><?php echo $row['grade_order']; ?></td>
+
+						<td class="px-2 py-2 border-b text-center">
+							<a href="grade/delete.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Do you want to delete?')">
+								<button class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
+							</a>
+						</td>
+
+						<td class="px-2 py-2 border-b text-center">
+							<a href="?page=edit&section=grade&id=<?php echo $row['id']; ?>">
+								<button class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">Edit</button>
+							</a>
+						</td>
+
+						<td class="px-2 py-2 border-b text-center">
+							<a href="?page=add-sub-form&section=grade&id=<?php echo $row['id']; ?>">
+								<button class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">Subject</button>
+							</a>
+						</td>
+					</tr>
+					<?php } ?>
+				</tbody>
+			</table>
 	</body>
-</html>
