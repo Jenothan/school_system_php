@@ -1,94 +1,65 @@
-<html>	
-  <head>
-    <!-- <link rel="stylesheet" href="../global.css"> -->
-	
-  </head>
-  <body>
-<?php 
-		// include('../auth/auth_session.php');
-		$id=$_GET['id'];
-		// require_once('../config.php');
+<body class="bg-gray-50 p-6">
 
-		$query="SELECT * FROM subjects WHERE id='$id'";
-		
-		$results=mysqli_query($con, $query );
-		
-		if(!$results){
-			echo mysqli_error($con);
-		}
-		
-		$row = mysqli_fetch_array($results);
-		
-			$subject_name=$row['subject_name'];
-			$subject_index=$row['subject_index'];
-			$subject_order=$row['subject_order'];
-			$subject_color=$row['subject_color'];
-			$subject_number=$row['subject_number'];	
+<?php 
+    $id = $_GET['id'];
+    $query = "SELECT * FROM subjects WHERE id='$id'";
+    $results = mysqli_query($con, $query);
+    if(!$results) die("Query Failed: " . mysqli_error($con));
+
+    $row = mysqli_fetch_array($results);
+    $subject_name  = $row['subject_name'];
+    $subject_index = $row['subject_index'];
+    $subject_order = $row['subject_order'];
+    $subject_color = $row['subject_color'];
+    $subject_number = $row['subject_number'];
 ?>
 
-<div>
+<div class="w-full bg-white p-6">
+    <h1 class="text-3xl font-bold mb-6 text-center">Subject Details</h1>
 
-      <form>
-        <h1>Student Details</h1>
-		
-		<div>
-			<table class="table-col">
-				<thead>
-					<tr>
-						<th>Subject Name</th>
-						<td><p><?php echo $subject_name; ?></p></td>
-					</tr>
-					<tr>
-						<th>Subject Index</th>
-						<td><p><?php echo $subject_index; ?></p></td>
-					</tr>
-					<tr>
-						<th>Subject Order</th>
-						<td><p><?php echo $subject_order; ?></p></td>
-					</tr>
-					<tr>
-						<th>Subject Color</th>
-						<td><p><?php echo $subject_color; ?></p></td>
-					</tr>
-					<tr>
-						<th>Subject Number</th>
-						<td><p><?php echo $subject_number; ?></p></td>
-					</tr>
-				</thead>
-				
-			</table>
-		</div>
-	
-        <div class="name-row">
-          <div class="name-col">
-            <label for="subject_name">Subject Name:</label>
-            <p><?php echo $subject_name; ?></p>
-          </div>
+    <table class="w-full border border-[#387281] rounded">
+        <tr class="bg-[#3C7A89] text-white">
+            <th class="w-[50%] p-3 text-left border-r">Field</th>
+            <th class="w-[50%] p-3 text-left">Details</th>
+        </tr>
 
-          <div class="name-col">
-            <label for="subject_index">Subject Index:</label>
-            <p><?php echo $subject_index; ?></p>
-          </div>
-		  
-		  <div class="name-col">
-            <label for="subject_order">Subject Order:</label>
-            <p><?php echo $subject_order; ?></p>
-          </div>
+        <tr class="border-t">
+            <td class="p-3 font-semibold border-r">Subject Name</td>
+            <td class="p-3 text-lg"><?php echo $subject_name; ?></td>
+        </tr>
 
-          <div class="name-col">
-            <label for="subject_color">Subject Color:</label>
-            <p><?php echo $subject_color; ?></p>
-          </div>
-		  
-		  <div class="name-col">
-            <label for="subject_number">Subject Number:</label>
-            <p><?php echo $subject_number; ?></p>
-          </div>
-		  
-        </div>
-		<a href="?page=edit&section=subject&id=<?php echo $id; ?>" class="btn btn-warning">Edit</a>
-      </form>
+        <tr class="border-t">
+            <td class="p-3 font-semibold border-r">Subject Index</td>
+            <td class="p-3 text-lg"><?php echo $subject_index; ?></td>
+        </tr>
+
+        <tr class="border-t">
+            <td class="p-3 font-semibold border-r">Subject Order</td>
+            <td class="p-3 text-lg"><?php echo $subject_order; ?></td>
+        </tr>
+
+        <tr class="border-t">
+            <td class="p-3 font-semibold border-r">Subject Color</td>
+            <td class="p-3 text-lg">
+                <?php echo $subject_color; ?>
+            </td>
+        </tr>
+
+        <tr class="border-t">
+            <td class="p-3 font-semibold border-r">Subject Number</td>
+            <td class="p-3 text-lg"><?php echo $subject_number; ?></td>
+        </tr>
+    </table>
+
+    <!-- Edit Button -->
+    <div class="flex justify-end mt-6">
+        <a href="?page=edit&section=subject&id=<?php echo $id; ?>"
+           class="px-5 py-2 bg-gradient-to-br from-yellow-300 to-yellow-500 
+                  hover:from-yellow-500 hover:to-yellow-300
+                  text-black font-semibold rounded-[10px]">
+           Edit
+        </a>
     </div>
-  </body>
-</html>
+</div>
 
+</body>

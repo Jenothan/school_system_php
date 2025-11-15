@@ -1,44 +1,60 @@
 <html>
-	<head>
-		<!-- <link rel='stylesheet' href='../global.css' />
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-	</head>
-	<body>
-		<?php 
-			// include('../auth/auth_session.php');
-			// require_once('../config.php');
-		
-			$query="SELECT * FROM subjects WHERE deleted_at IS NULL";
-			$result=mysqli_query($con, $query);
-			
-			if(!$result){
-				die(mysqli_error($con));
-			}
-		?>
-			<h1>Subjects Details</h1>
-			<table>
-				<tr>
-					<th style="padding: 8px;">Subject Name</th>
-					<th>Subject Index</th>
-					<th>Subject Order</th>
-					<th>Subject Color</th>
-					<th>Subject Number</th>
-					<th colspan='3'>Actions</th>
-				</tr>
-			<?php while($row=mysqli_fetch_array($result)) { ?>
-				<tr>
-					<td><?php echo $row[1]; ?></td>
-					<td><?php echo $row[2]; ?></td>
-					<td><?php echo $row[3]; ?></td>
-					<td><?php echo $row[4]; ?></td>
-					<td><?php echo $row[5]; ?></td>
-					<td><a href="subject/delete.php?id=<?php echo $row[0]; ?>" onclick="return confirm('Do you want to delete?')"><button class="btn btn-danger">Delete</button></a></td>
-					<td><a href="?page=edit&section=subject&id=<?php echo $row[0]; ?>"><button class="btn btn-warning">Edit</button></a></td>
-					<td><a href="?page=show&section=subject&id=<?php echo $row[0]; ?>"><button class="btn btn-info">View</button></a></td>
-				</tr>
-			<?php } ?>
-			</table>
-						<a href="?page=create_subject_form&section=subject"><button style="width: 200px; padding: 10px; background-color: green; border-radius: 10px; cursor: pointer; color: white;">Add Subjects</button></a>
 
-	</body>
+<head>
+	<!-- <link rel='stylesheet' href='../global.css' />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+</head>
+
+<body>
+	<?php
+	// include('../auth/auth_session.php');
+	// require_once('../config.php');
+
+	$query = "SELECT * FROM subjects WHERE deleted_at IS NULL";
+	$result = mysqli_query($con, $query);
+
+	if (!$result) {
+		die(mysqli_error($con));
+	}
+	?>
+	<table class="min-w-full border border-gray-300 divide-y divide-gray-300 text-sm">
+		<thead class="bg-gray-100">
+			<tr>
+				<th class="px-4 py-2 text-left border-b">Subject Name</th>
+				<th class="px-4 py-2 text-left border-b">Subject Index</th>
+				<th class="px-4 py-2 text-left border-b">Subject Order</th>
+				<th class="px-4 py-2 text-left border-b">Subject Color</th>
+				<th class="px-4 py-2 text-left border-b">Subject Number</th>
+				<th class="px-4 py-2 text-center border-b" colspan="3">Actions</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<?php while ($row = mysqli_fetch_array($result)) { ?>
+				
+					<tr class="hover:bg-gray-200 cursor-pointer" onclick="window.location='?page=show&section=subject&id=<?php echo $row[0]; ?>'">
+						<td class="px-4 py-2 border-b"><?php echo $row[1]; ?></td>
+						<td class="px-4 py-2 border-b"><?php echo $row[2]; ?></td>
+						<td class="px-4 py-2 border-b"><?php echo $row[3]; ?></td>
+						<td class="px-4 py-2 border-b"><?php echo $row[4]; ?></td>
+						<td class="px-4 py-2 border-b"><?php echo $row[5]; ?></td>
+
+						<td class="px-2 py-2 border-b text-center">
+							<a href="subject/delete.php?id=<?php echo $row[0]; ?>" onclick="return confirm('Do you want to delete?')">
+								<button class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
+							</a>
+						</td>
+
+						<td class="px-2 py-2 border-b text-center">
+							<a href="?page=edit&section=subject&id=<?php echo $row[0]; ?>">
+								<button class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">Edit</button>
+							</a>
+						</td>
+					</tr>
+				
+			<?php } ?>
+		</tbody>
+	</table>
+</body>
+
 </html>

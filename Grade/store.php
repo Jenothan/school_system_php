@@ -19,7 +19,7 @@
 			}
 			
 			if(in_array($grade_name, $grade_names)) {
-				header('location:../index.php?section=grade&page=create_grade_form&e=1');
+				header('location:../index.php?section=grade&page=create-form&e=1');
 				exit();
 			}
 			else {

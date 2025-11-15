@@ -1,165 +1,135 @@
-<html>
-  <head>
-    <!-- <link rel="stylesheet" href="../global.css"> -->
-	<!-- <style>
-		.form {
-			width: 500px;
-		}
-	</style> -->
-	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-  </head>
-  <body>
-   <?php $id=$_GET['id'];
-		 $error=$_GET['e'] ?? 0;
-		 if($error == 1) {
-		 $error_msg="Student Addmission number or nic already exist!";
-		 }
-		 else if($error == 2) {
-			 $error_msg="Image not found!";
-		 }
-	?>
-   
-	<?php 
-		// include('../auth/auth_session.php');
-		// require_once('../config.php');
-		
-		$query="SELECT * FROM students WHERE id='$id'";
-		
-		$result=mysqli_query($con, $query);
-		
-		if(!$result) {
-			die("Query Failed".mysqli_error($con));
-		}
-		
-		$row=mysqli_fetch_array($result);
-		
-			$father_name=$row['father_name'];
-			$student_name=$row['student_name'];
-			$addmission_no=$row['addmission_no'];
-			$grade_id=$row['grade_id'];
-			$nic=$row['nic'];
-			$dob=$row['dob'];
-			$gender=$row['gender']?? "";
-			$telephone=$row['telephone'];
-			$address=$row['address'];
-	?>
-	
-    <div class="form">
-      <form action="student/update.php" method="POST" enctype="multipart/form-data">
-        <h1>Edit Student</h1>
-		
-		<?php if($error==1 or $error==2) { ?>
-			<div class="alert alert-danger" role="alert">
-			  <?php echo $error_msg; ?>
-			</div>
-		<?php } ?>
-		
-			<input type='hidden' name='id' id='id' value="<?php echo $id; ?>"/>
-			
-			<?php 
-				$img_query="SELECT * FROM images WHERE student_id='$id'";
-				$img_res=mysqli_query($con, $img_query);
-				if(!$img_res){
-					die("query failed" . mysqli_error($con));
-				}
-				$path="profiles/def.jpg";
-				if(mysqli_num_rows($img_res)>0) {
-					$img_row=mysqli_fetch_array($img_res);
-					$path=substr($img_row['file_name'],3);
-				}
-			?>
-		<div style='background-color: #F6F7EB; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 10px; border: 1px solid #ADD2C2; margin-bottom: 10px; gap: 10px;'>
-			<img src='<?php echo $path; ?>' alt='profile image' width=150 height=150 style='border-radius:100%;' /> 
-			
+<body>
 
-			<a href="student/delete_img.php?id=<?php echo $id; ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete?')">Delete</a>
+<?php 
+    $id = $_GET['id'];
+    $error = $_GET['e'] ?? 0;
+    if($error == 1) $error_msg = "Student Admission number or NIC already exist!";
+    else if($error == 2) $error_msg = "Image not found!";
+
+    // Get student info
+    $query = "SELECT * FROM students WHERE id='$id'";
+    $result = mysqli_query($con, $query);
+    if (!$result) die("Query Failed: " . mysqli_error($con));
+
+    $row = mysqli_fetch_array($result);
+    $father_name = $row['father_name'];
+    $student_name = $row['student_name'];
+    $addmission_no = $row['addmission_no'];
+    $grade_id = $row['grade_id'];
+    $nic = $row['nic'];
+    $dob = $row['dob'];
+    $gender = $row['gender'] ?? "";
+    $telephone = $row['telephone'];
+    $address = $row['address'];
+
+    // Get profile image
+    $img_query = "SELECT * FROM images WHERE student_id='$id'";
+    $img_res = mysqli_query($con, $img_query);
+    $path = "profiles/def.jpg"; // default image
+    if(mysqli_num_rows($img_res) > 0){
+        $img_row = mysqli_fetch_array($img_res);
+        $path = substr($img_row['file_name'], 3);
+    }
+
+    // Get all grades
+    $grade_res = mysqli_query($con, "SELECT id, grade_name FROM grades");
+?>
+
+<div class="p-6 rounded-lg w-full">
+
+    <h1 class="text-3xl font-bold mb-6 text-center">Edit Student</h1>
+
+    <?php if($error==1 || $error==2) { ?>
+        <div class="bg-red-500 text-white p-3 rounded mb-4">
+            <?php echo $error_msg; ?>
+        </div>
+    <?php } ?>
+<form action="student/update.php" method="POST" enctype="multipart/form-data">
+    <!-- Profile Image -->
+    <div class="flex flex-col items-center mb-6">
+		<!-- Profile Image -->
+		<img src="<?php echo $path; ?>" alt="profile image" class="w-36 h-36 rounded-full mb-4 border-2 border-[#ADD2C2] object-cover">
+
+		<!-- Buttons Row -->
+		<div class="flex flex-row items-center justify-center pl-20 gap-4">
+			<!-- Delete Button -->
+			<a href="student/delete-img.php?id=<?php echo $id; ?>" 
+			class="flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full hover:bg-red-700 transition"
+			onclick="return confirm('Do you want to delete?')">
+				<img src="./public/delete.png" alt="delete button" class="w-full h-full">
+			</a>
+
+			<!-- Upload Button -->
+				<input type="file" name="imagefile" accept="image/*">
+			
 		</div>
-			<input type="file" id="file" name="imagefile" accept="image/*" class="form-control" >
-		
-        <div class="row">
-          <div class="col">
-            <label for="father_name">Father Name</label>
-            <input type="text" name="father_name" id="father_name" value="<?php echo $father_name; ?>" required />
-          </div>
-		  
-		  <div class="col">
-            <label for="student_name">Student Name</label>
-            <input type="text" name="student_name" id="student_name" value="<?php echo $student_name; ?>" required />
-          </div>
-        </div>
-		
-		<div class="row">
-          <div class="col">
-            <label for="addmission_no">Addmission No</label>
-            <input type="text" id="addmission_no" name="addmission_no" value="<?php echo $addmission_no; ?>" required />
-          </div>
-        </div>
-		
-		
-		<div class="row">
-          <div class="col">
-            <label for="grade_id">Grade ID</label>
-			<select name="grade_id" id="grade_id" required>
-				<option value="" disabled selected>Select your Grade</option>
-				
-	<?php
-			$quer="SELECT id, grade_name FROM grades";
-			
-			$res=mysqli_query($con, $quer);
-			
-			if(!$res) {
-				die("Query Failed!".mysqli_error($con));
-			}
-			while($rows=mysqli_fetch_assoc($res)) { ?>
-				<option value="<?php echo $rows['id']; ?>" <?php echo $rows['id']==$grade_id ? 'selected' : ''; ?>><?php echo $rows['grade_name']; ?></option>
-			<?php } ?>
-			</select>
-          </div>
-        </div>
-		
-		<div class="row">
-          <div class="col">
-            <label for="nic">NIC</label>
-            <input type="text" id="nic" name="nic" value="<?php echo $nic; ?>" required />
-          </div>
-        </div>
-		
-		<div class="row">
-          <div class="col">
-            <label for="dob">Date of Birth</label>
-            <input type="date" id="dob" name="dob" value="<?php echo $dob; ?>" required />
-          </div>
+	</div>
+
+    <!-- Student Details Table -->
+    
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <table class="w-full border border-[#387281] rounded mb-6">
+            <tr class="bg-[#3C7A89] text-white">
+                <th class="p-3 border-r border-white text-left">Field</th>
+                <th class="p-3 text-left">Value</th>
+            </tr>
+            <tr class="border-t">
+                <td class="p-3 font-semibold border-r border-[#387281]">Father Name</td>
+                <td class="p-3"><input type="text" name="father_name" value="<?php echo $father_name; ?>" class="w-full border border-[#387281] p-2 rounded" required></td>
+            </tr>
+            <tr class="border-t">
+                <td class="p-3 font-semibold border-r border-[#387281]">Student Name</td>
+                <td class="p-3"><input type="text" name="student_name" value="<?php echo $student_name; ?>" class="w-full border border-[#387281] p-2 rounded" required></td>
+            </tr>
+            <tr class="border-t">
+                <td class="p-3 font-semibold border-r border-[#387281]">Admission No</td>
+                <td class="p-3"><input type="text" name="addmission_no" value="<?php echo $addmission_no; ?>" class="w-full border border-[#387281] p-2 rounded" required></td>
+            </tr>
+            <tr class="border-t">
+                <td class="p-3 font-semibold border-r border-[#387281]">Grade</td>
+                <td class="p-3">
+                    <select name="grade_id" class="w-full border border-[#387281] p-2 rounded" required>
+                        <option value="" disabled>Select your Grade</option>
+                        <?php while($grade_row = mysqli_fetch_assoc($grade_res)) { ?>
+                            <option value="<?php echo $grade_row['id']; ?>" <?php echo $grade_row['id']==$grade_id?'selected':''; ?>>
+                                <?php echo $grade_row['grade_name']; ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </td>
+            </tr>
+            <tr class="border-t">
+                <td class="p-3 font-semibold border-r border-[#387281]">NIC</td>
+                <td class="p-3"><input type="text" name="nic" value="<?php echo $nic; ?>" class="w-full border border-[#387281] p-2 rounded" required></td>
+            </tr>
+            <tr class="border-t">
+                <td class="p-3 font-semibold border-r border-[#387281]">Date of Birth</td>
+                <td class="p-3"><input type="date" name="dob" value="<?php echo $dob; ?>" class="w-full border border-[#387281] p-2 rounded" required></td>
+            </tr>
+            <tr class="border-t">
+                <td class="p-3 font-semibold border-r border-[#387281]">Gender</td>
+                <td class="p-3">
+                    <label class="mr-4"><input type="radio" name="gender" value="male" <?php echo $gender=='male'?'checked':''; ?> required> Male</label>
+                    <label><input type="radio" name="gender" value="female" <?php echo $gender=='female'?'checked':''; ?> required> Female</label>
+                </td>
+            </tr>
+            <tr class="border-t">
+                <td class="p-3 font-semibold border-r border-[#387281]">Address</td>
+                <td class="p-3"><textarea name="address" rows="3" class="w-full border border-[#387281] p-2 rounded" required><?php echo $address; ?></textarea></td>
+            </tr>
+            <tr class="border-t">
+                <td class="p-3 font-semibold border-r border-[#387281]">Telephone</td>
+                <td class="p-3"><input type="tel" name="telephone" value="<?php echo $telephone; ?>" class="w-full border border-[#387281] p-2 rounded" required></td>
+            </tr>
+        </table>
+
+        <!-- Action Buttons -->
+        <div class="flex justify-end gap-4">
+            <button type="reset" class="px-5 py-2 bg-gray-300 rounded hover:bg-gray-400">Reset</button>
+            <button type="submit" class="px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
         </div>
 
-        <label for="gender">Gender</label>
-		<div class="gender-row" required>
-		  <input type="radio" id="male" value="male" name="gender" <?php echo $gender=='male' ? 'checked' : '' ?> required />
-		  <label for="male">Male</label>
-		  <input type="radio" id="female" value="female" name="gender" <?php echo $gender=='female' ? 'checked' : '' ?> required />
-		  <label for="female">Female</label>
-		</div>
+    </form>
+</div>
 
-        <div class="row">
-		  <div class="col">
-            <label for="address">Address</label>
-			<textarea id="address" name="address" rows="3" required><?php echo $address; ?></textarea>
-          </div>
-		</div>
-		 
-		<div class="row">
-          <div class="col">
-            <label for="phone">Telephone</label>
-            <input type="tel" id="phone" name="telephone" value="<?php echo $telephone; ?>" required />
-          </div>
-        </div>
-
-        
-
-        <div class="actions">
-          <input type="reset" />
-          <input type="submit" />
-        </div>
-      </form>
-    </div>
-  </body>
-</html>
+</body>

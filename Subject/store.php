@@ -22,7 +22,7 @@
 			}
 			
 			if(in_array($subject_name, $subject_names) or in_array($subject_index, $subject_indexs)) {
-				header('location:../index.php?page=create_subject_form&section=subject&e=1');
+				header('location:../index.php?page=create-form&section=subject&e=1');
 				exit();
 			}
 			else {
