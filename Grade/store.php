@@ -10,7 +10,7 @@
 			$check_query="SELECT grade_name FROM grades";
 			$check_res=mysqli_query($con, $check_query);
 			if(!$check_res){
-				die("query error!" . mysqli_error($check_res));
+				die("query error!" . mysqli_error($con));
 			}
 			
 			$grade_names=[];
@@ -19,7 +19,7 @@
 			}
 			
 			if(in_array($grade_name, $grade_names)) {
-				header('location:create_grade_form.php?e=1');
+				header('location:../index.php?section=grade&page=create-form&e=1');
 				exit();
 			}
 			else {
@@ -31,7 +31,8 @@
 					echo mysqli_error($con);
 				}
 				
-				header('location:index.php');
+				header('location:../index.php?section=grade&page=index');
+				exit();
 			}
 			
 	}

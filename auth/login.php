@@ -1,4 +1,5 @@
 <?php 
+	
 	if($_SERVER['REQUEST_METHOD']== 'POST') {
 		$username=$_POST['username'];
 		$password=$_POST['password'];
@@ -19,6 +20,7 @@
 			session_start();
 			$_SESSION['username'] = $username;
 			header('location:../index.php');
+			exit();
 		}
 		else {
 			header('location:login_form.php');

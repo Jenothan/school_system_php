@@ -1,82 +1,100 @@
-<html>
-	<head>
-		<link rel='stylesheet' href='../global.css' />
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	</head>
-	<body>
-		<?php 
-			include('../auth/auth_session.php');
-			require_once('../config.php');
-			
-			
-			$query="SELECT * FROM students WHERE deleted_at IS NULL";
-			$result=mysqli_query($con, $query);
-			
-			if(!$result){
-				die(mysqli_error($con));
-			}
-		?>
-			<h1>Student Details</h1>
-			<table>
-				<tr>
-					<th style="width: 40%;">Profile</th>
-					<th style="width: 40%;">Father Name</th>
-					<th style="width: 40%;">Student Name</th>
-					<th style="width: 40%;">Addmission No</th>
-					<th style="width: 40%;">Grade ID</th>
-					<th style="width: 40%;">NIC</th>
-					<th style="width: 40%;">DOB</th>
-					<th style="width: 40%;">Gender</th>
-					<th style="width: 40%;">Telephone</th>
-					<th style="width: 40%;">Address</th>
-					<th style="width: 40%;" colspan='4'>Actions</th>
-				</tr>
-			<?php while($row=mysqli_fetch_array($result)) { ?>
-				<tr>
+<body>
+	<?php
+	$query = "SELECT * FROM students WHERE deleted_at IS NULL";
+	$result = mysqli_query($con, $query);
+
+	if (!$result) {
+		die(mysqli_error($con));
+	}
+	?>
+	<table class="min-w-full border border-gray-300 divide-y divide-gray-300 text-sm">
+		<thead class="bg-gray-100">
+			<tr>
+				<th class="px-3 py-2 text-left font-semibold">Profile</th>
+				<th class="px-3 py-2 text-left font-semibold">Father Name</th>
+				<th class="px-3 py-2 text-left font-semibold">Student Name</th>
+				<th class="px-3 py-2 text-left font-semibold">Admission No</th>
+				<th class="px-3 py-2 text-left font-semibold">Grade</th>
+				<th class="px-3 py-2 text-left font-semibold">NIC</th>
+				<th class="px-3 py-2 text-left font-semibold">DOB</th>
+				<th class="px-3 py-2 text-left font-semibold">Gender</th>
+				<th class="px-3 py-2 text-left font-semibold">Telephone</th>
+				<th class="px-3 py-2 text-left font-semibold">Address</th>
+				<th class="px-3 py-2 text-center font-semibold" colspan="4">Actions</th>
+			</tr>
+		</thead>
+
+		<tbody class="divide-y divide-gray-200">
+			<?php while ($row = mysqli_fetch_array($result)) { 
+				$stu_id=$row['id'];
+			?>
+				<tr class="hover:bg-gray-200 transition cursor-pointer" onclick="window.location='?page=show&section=student&id=<?php echo $row[0]; ?>'">
 					<?php
-					$path="../profiles/def.jpg";
-					$alt="default profile image";
-					$img_query="SELECT file_name, original_name FROM images WHERE student_id='$row[0]'";
-					$img_res=mysqli_query($con, $img_query);
-					if(mysqli_num_rows($img_res)){
-						$img_row=mysqli_fetch_array($img_res);
-						$path=$img_row['file_name'];
-						$alt=$img_row['original_name'];
+					$path = "profiles/def.jpg";
+					$alt = "default profile image";
+					$img_query = "SELECT file_name, original_name FROM images WHERE student_id='$stu_id'";
+					$img_res = mysqli_query($con, $img_query);
+					if (mysqli_num_rows($img_res)) {
+						$img_row = mysqli_fetch_array($img_res);
+						$path = substr($img_row['file_name'], 3);
+						$alt = $img_row['original_name'];
 					}
 					?>
-					
-					<td>
-						<img src='<?php echo $path; ?>' alt='profile image' width=75 height=75 style='border-radius:100%;' /> 
+					<td class="px-3 py-2 flex justify-center w-[100px]">
+						<img src="<?php echo $path; ?>" alt="<?php echo $alt; ?>"
+							class="w-16 h-16 rounded-full">
 					</td>
-					<td><?php echo $row[1]; ?></td>
-					<td><?php echo $row[2]; ?></td>
-					<td><?php echo $row[3]; ?></td>
-		<?php
-			$quer="SELECT id, grade_name FROM grades";
-		
-			$res=mysqli_query($con, $quer);
-			
-			if(!$res) {
-				die("Query Failed!".mysqli_error($con));
-			}
-			while($rows=mysqli_fetch_assoc($res)) { 
-				if($row[4]==$rows['id']){
-			?>
-					<td><?php echo $rows['grade_name']; break;  ?></td>
-			<?php } ?>
-			<?php } ?>
-					<td><?php echo $row[5]; ?></td>
-					<td><?php echo $row[6]; ?></td>
-					<td><?php echo $row[7]; ?></td>
-					<td><?php echo $row[8]; ?></td>
-					<td><?php echo $row[9]; ?></td>
-					<td><a href="delete.php?id=<?php echo $row[0]; ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete?')">Delete</a></td>
-					<td><a href="edit.php?id=<?php echo $row[0]; ?>" class="btn btn-warning">Edit</a></td>
-					<td><a href="show.php?id=<?php echo $row[0]; ?>" class="btn btn-success">View</a></td>
-					<td><a href="addsub_form.php?id=<?php echo $row[0]; ?>" class="btn btn-primary">Sub</a></td>
+
+					<td class="px-3 py-2"><?php echo $row['father_name']; ?></td>
+					<td class="px-3 py-2"><?php echo $row['student_name']; ?></td>
+					<td class="px-3 py-2"><?php echo $row['addmission_no']; ?></td>
+
+					<?php
+					$grade_n = $row['grade_id'];
+					$quer = "SELECT grade_name FROM grades where id='$grade_n'";
+
+					$res = mysqli_query($con, $quer);
+
+					if (!$res) {
+						die("Query Failed!" . mysqli_error($con));
+					}
+
+					$rows = mysqli_fetch_assoc($res);
+					?>
+
+					<td class="px-3 py-2"><?php echo $rows['grade_name']; ?></td>
+
+					<td class="px-3 py-2"><?php echo $row['nic']; ?></td>
+					<td class="px-3 py-2"><?php echo $row['dob']; ?></td>
+					<td class="px-3 py-2"><?php echo $row['gender']; ?></td>
+					<td class="px-3 py-2"><?php echo $row['telephone']; ?></td>
+					<td class="px-3 py-2"><?php echo $row['address']; ?></td>
+
+
+					<td class="px-2">
+						<a href="student/delete.php?id=<?php echo $stu_id; ?>"
+							onclick="return confirm('Do you want to delete?')"
+							class="px-3 py-2 text-white bg-red-600 rounded hover:bg-red-700 text-xs">
+							Delete
+						</a>
+					</td>
+
+					<td class="px-2">
+						<a href="?section=student&page=edit&id=<?php echo $stu_id; ?>"
+							class="px-3 py-2 text-white bg-yellow-500 rounded hover:bg-yellow-600 text-xs">
+							Edit
+						</a>
+					</td>
+
+					<td class="px-2">
+						<a href="?section=student&page=add-sub-form&id=<?php echo $stu_id; ?>"
+							class="px-3 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 text-xs">
+						Subject
+						</a>
+					</td>
 				</tr>
+
 			<?php } ?>
-			</table>
-			<a href="Create_Form.php" class="btn btn-success">Add Student</a>
-	</body>
-</html>
+		</tbody>
+	</table>
+</body>

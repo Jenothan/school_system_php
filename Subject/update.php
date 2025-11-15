@@ -9,10 +9,10 @@
 			
 			require_once('../config.php');
 			
-			$check_query="SELECT subject_name, subject_index FROM subjects";
+			$check_query="SELECT subject_name, subject_index FROM subjects WHERE id!='$id'";
 			$check_res=mysqli_query($con, $check_query);
 			if(!$check_res){
-				die("query error!" . mysqli_error($check_res));
+				die("query error!" . mysqli_error($con));
 			}
 			
 			$subject_names=[];
@@ -23,7 +23,7 @@
 			}
 			
 			if(in_array($subject_name, $subject_names) or in_array($subject_index, $subject_indexs)) {
-				header('location:edit.php?e=1');
+				header('location:../index.php?page=edit&section=subject&id='.$id.'&e=1');
 				exit();
 			}
 			else {
@@ -36,7 +36,7 @@
 					die("Query failed".mysqli_error($con));
 				}
 				
-				header('location:index.php');
+				header('location:../index.php?page=index&section=subject&id='.$id);
 			}
 	}
 ?>

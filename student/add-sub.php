@@ -23,6 +23,6 @@
 					$sub_res=mysqli_query($con, $sub_query);
 				}
 			}
-			header('location:addsub_form.php?id='.$id);
+			header('location:../index.php?page=add-sub-form&section=student&id='.$id);
 	}
 ?>

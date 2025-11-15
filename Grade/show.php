@@ -1,60 +1,63 @@
-<html>	
-  <head>
-    <link rel="stylesheet" href="../global.css">
-  </head>
-  <body>
-<?php 
-		include('../auth/auth_session.php');
-		$id=$_GET['id'];
-		require_once('../config.php');
+<body>
 
-		$query="SELECT * FROM grades WHERE id='$id'";
-		
-		$results=mysqli_query($con, $query );
-		
-		if(!$results){
-			echo mysqli_error($con);
-		}
-		
-		$row = mysqli_fetch_array($results);
-		
-			$grade_name=$row['grade_name']?? "";
-			$grade_group=$row['grade_group']?? "";
-			$grade_color=$row['grade_color']?? "";
-			$grade_order=$row['grade_order']?? "";
-	
+<?php 
+    $id = $_GET['id'];
+
+    $query = "SELECT * FROM grades WHERE id='$id'";
+    $results = mysqli_query($con, $query);
+
+    if (!$results) {
+        echo mysqli_error($con);
+    }
+
+    $row = mysqli_fetch_array($results);
+
+    $grade_name  = $row['grade_name'] ?? "";
+    $grade_group = $row['grade_group'] ?? "";
+    $grade_color = $row['grade_color'] ?? "";
+    $grade_order = $row['grade_order'] ?? "";
 ?>
 
-<div>
+<div class="p-6 rounded-lg w-full">
 
-      <form>
-        <h1>Grade Details</h1>
-	
-        <div class="name-row">
-          <div class="name-col">
-            <label for="grade_name">Grade Name:</label>
-            <p><?php echo $grade_name; ?></p>
-          </div>
+    <h1 class="text-3xl font-bold mb-6 text-center">Grade Details</h1>
 
-          <div class="name-col">
-            <label for="grade_group">Grade Group:</label>
-            <p><?php echo $grade_group; ?></p>
-          </div>
-		  
-		  <div class="name-col">
-            <label for="grade_color">Grade Color:</label>
-            <p><?php echo $grade_color; ?></p>
-          </div>
+    <table class="w-full border border-[#387281] rounded">
+        <tr class="bg-[#3C7A89] text-white ">
+            <th class="w-[50%] p-3 text-left border-r">Field</th>
+            <th class="w-[50%] p-3 text-left">Details</th>
+        </tr>
 
-          <div class="name-col">
-            <label for="grade_order">Grade Order:</label>
-            <p><?php echo $grade_order; ?></p>
-          </div>
-		  
-        </div>
-		<a href="edit.php?id=<?php echo $id; ?>" class="btn btn-warning">Edit</a>
-      </form>
+        <tr class="border-t">
+            <td class="p-3 font-semibold border-r">Grade Name</td>
+            <td class="p-3 text-lg"><?php echo $grade_name; ?></td>
+        </tr>
+
+        <tr class="border-t">
+            <td class="p-3 font-semibold border-r">Grade Group</td>
+            <td class="p-3 text-lg"><?php echo $grade_group; ?></td>
+        </tr>
+
+        <tr class="border-t">
+            <td class="p-3 font-semibold border-r">Grade Color</td>
+            <td class="p-3 text-lg"><?php echo $grade_color; ?></td>
+        </tr>
+
+        <tr class="border-t">
+            <td class="p-3 font-semibold border-r">Grade Order</td>
+            <td class="p-3 text-lg"><?php echo $grade_order; ?></td>
+        </tr>
+    </table>
+
+    <div class="flex justify-end mt-6">
+        <a href="?page=edit&section=grade&id=<?php echo $id; ?>"
+           class="px-5 py-2 bg-gradient-to-br from-yellow-300 to-yellow-500 
+                  hover:from-yellow-500 hover:to-yellow-300
+                  text-black font-semibold rounded-[10px]">
+            Edit
+        </a>
     </div>
-  </body>
-</html>
 
+</div>
+
+</body>
