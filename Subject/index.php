@@ -1,14 +1,5 @@
-<html>
-
-<head>
-	<!-- <link rel='stylesheet' href='../global.css' />
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-</head>
-
 <body>
 	<?php
-	// include('../auth/auth_session.php');
-	// require_once('../config.php');
 
 	$query = "SELECT * FROM subjects WHERE deleted_at IS NULL";
 	$result = mysqli_query($con, $query);
@@ -56,5 +47,3 @@
 		</tbody>
 	</table>
 </body>
-
-</html>

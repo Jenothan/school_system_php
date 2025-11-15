@@ -50,12 +50,10 @@
 <div class="p-6 rounded-lg w-full">
     <h1 class="text-3xl font-bold mb-6 text-center">Student Details</h1>
 
-    <!-- Profile Image -->
     <div class="flex justify-center mb-6">
         <img src="<?php echo $path; ?>" alt="profile image" class="w-36 h-36 rounded-full object-cover border border-[#ADD2C2]">
     </div>
 
-    <!-- Details Table -->
     <table class="w-full border border-[#387281] rounded">
         <tr class="bg-[#3C7A89] text-white">
             <th class="p-3 border-r border-white text-left">Field</th>
