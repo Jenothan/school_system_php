@@ -51,7 +51,7 @@
         </tr>
     </table>
 
-    <!-- Edit Button -->
+    
     <div class="flex justify-end mt-6">
         <a href="?page=edit&section=subject&id=<?php echo $id; ?>"
            class="px-5 py-2 bg-gradient-to-br from-yellow-300 to-yellow-500 

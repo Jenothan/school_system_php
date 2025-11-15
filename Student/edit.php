@@ -45,27 +45,27 @@
         </div>
     <?php } ?>
 <form action="student/update.php" method="POST" enctype="multipart/form-data">
-    <!-- Profile Image -->
+
     <div class="flex flex-col items-center mb-6">
-		<!-- Profile Image -->
+
 		<img src="<?php echo $path; ?>" alt="profile image" class="w-36 h-36 rounded-full mb-4 border-2 border-[#ADD2C2] object-cover">
 
-		<!-- Buttons Row -->
+	
 		<div class="flex flex-row items-center justify-center pl-20 gap-4">
-			<!-- Delete Button -->
+			
 			<a href="student/delete-img.php?id=<?php echo $id; ?>" 
 			class="flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full hover:bg-red-700 transition"
 			onclick="return confirm('Do you want to delete?')">
 				<img src="./public/delete.png" alt="delete button" class="w-full h-full">
 			</a>
 
-			<!-- Upload Button -->
+		
 				<input type="file" name="imagefile" accept="image/*">
 			
 		</div>
 	</div>
 
-    <!-- Student Details Table -->
+    
     
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <table class="w-full border border-[#387281] rounded mb-6">
@@ -123,7 +123,6 @@
             </tr>
         </table>
 
-        <!-- Action Buttons -->
         <div class="flex justify-end gap-4">
             <button type="reset" class="px-5 py-2 bg-gray-300 rounded hover:bg-gray-400">Reset</button>
             <button type="submit" class="px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>

@@ -2,7 +2,7 @@
 <?php 
     $id = $_GET['id'];
 
-    // Fetch student info
+    //----------------------------------- Fetch student info ----------------------------------------
     $student_query = "SELECT * FROM students WHERE id='$id'";
     $student_results = mysqli_query($con, $student_query);
     if(!$student_results) die(mysqli_error($con));
@@ -18,12 +18,14 @@
     $telephone = $row['telephone'];
     $address = $row['address'];
 
-    // Get grade name
+    //---------------------------------- get grade name ---------------------------------------------
+
     $grade_query = "SELECT grade_name FROM grades WHERE id='$grade_id'";
     $grade_res = mysqli_query($con, $grade_query);
     $grade_name = mysqli_fetch_array($grade_res)['grade_name'];
 
-    // Fetch student subjects
+    //----------------------------------- fetch student subjects -------------------------------------
+
     $stu_sub_query = "SELECT subject_id FROM student_subject WHERE student_id='$id'";
     $stu_sub_res = mysqli_query($con, $stu_sub_query);
     $subject_ids = [];
@@ -31,7 +33,8 @@
         $subject_ids[] = $stu_sub_row['subject_id'];
     }
 
-    // Fetch grade-specific subjects
+    //------------------------------- fetch grade-specific subjects ----------------------------------
+
     $grade_sub_query = "SELECT subject_id FROM grade_subject WHERE grade_id='$grade_id'";
     $grade_sub_res = mysqli_query($con, $grade_sub_query);
     $grade_subjects = [];
@@ -47,7 +50,6 @@
 
     <h1 class="text-3xl font-bold mb-6 text-center">Student Details & Subjects</h1>
 
-    <!-- Student Info Table -->
     <table class="w-full border border-[#387281] rounded mb-6">
         <tr class="bg-[#3C7A89] text-white">
             <th class="w-[50%] p-3 border-r border-white text-left">Field</th>
@@ -91,7 +93,6 @@
         </tr>
     </table>
 
-    <!-- Student Subjects Table -->
     <h2 class="text-2xl font-semibold mb-4">Subjects</h2>
     <table class="w-full border border-[#387281] rounded mb-6">
         <tr class="bg-[#3C7A89] text-white">
@@ -115,7 +116,6 @@
         <?php } ?>
     </table>
 
-    <!-- Grade-Specific Subject Assignment Form -->
     <h2 class="text-2xl font-semibold mb-4">Add Subjects</h2>
     <form action="student/add-sub.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
