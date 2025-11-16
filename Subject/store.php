@@ -1,4 +1,6 @@
 <?php
+	include('../auth/auth_session.php');
+
 	if($_SERVER['REQUEST_METHOD']=='POST'){
 			$subject_name=$_POST['subject_name'];
 			$subject_index=$_POST['subject_index'];
@@ -27,7 +29,7 @@
 			}
 			else {
 				
-				$query="INSERT INTO subjects (subject_name, subject_index, subject_order, subject_color, subject_number) VALUES ('$subject_name', '$subject_index', '$subject_order', '$subject_color', '$subject_number')";
+				$query="INSERT INTO subjects (subject_name, subject_index, subject_order, subject_color, subject_number, created_by) VALUES ('$subject_name', '$subject_index', '$subject_order', '$subject_color', '$subject_number', '$username')";
 			
 				$result=mysqli_query($con,$query);
 			

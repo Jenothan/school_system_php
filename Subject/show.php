@@ -15,7 +15,7 @@
 ?>
 
 <div class="w-full bg-white p-6">
-    <h1 class="text-3xl font-bold mb-6 text-center">Subject Details</h1>
+    <h1 class="text-3xl font-bold mb-6 text-center"><?php echo $subject_name; ?></h1>
 
     <table class="w-full border border-[#387281] rounded">
         <tr class="bg-[#3C7A89] text-white">

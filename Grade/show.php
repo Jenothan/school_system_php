@@ -29,12 +29,12 @@
         $sub_name = mysqli_fetch_assoc($sub_name_res)['subject_name'];
         $subject_ids[] = $sub_name;
     }
-    $subject_string = !empty($subject_ids) ? implode(", ", $subject_ids) : "Subjects not assigned";
+    $subject_string = !empty($subject_ids) ? implode(", ", $subject_ids) : "<div class='flex items-center'> <p class='text-red-700'> Subjects not assigned </p> <a href='?section=grade&page=add-sub-form&id=$id' class='ml-8 px-4 py-2 bg-blue-500 text-white rounded-lg'>Add</a></div>";
   ?>
 
   <div class="p-6 rounded-lg w-full">
 
-    <h1 class="text-3xl font-bold mb-6 text-center">Grade Details</h1>
+    <h1 class="text-3xl font-bold mb-6 text-center"><?php echo $grade_name; ?></h1>
 
     <table class="w-full border border-[#387281] rounded">
       <tr class="bg-[#3C7A89] text-white ">

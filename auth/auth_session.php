@@ -6,4 +6,9 @@
 		header('Location:'. BASE_URL .'/auth/login_form.php');
 		exit();
 	}
+	
+	$username='';
+	if(isset($_SESSION['username'])) {
+		$username = $_SESSION['username'];
+	}
 ?>

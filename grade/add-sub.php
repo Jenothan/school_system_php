@@ -1,5 +1,7 @@
 <!-- add_grade_sub.php -->
 <?php
+	include('../auth/auth_session.php');
+
 	if($_SERVER['REQUEST_METHOD']=='POST'){
 			$id=$_POST['id'];
 			$subjects=$_POST['subjects'];
@@ -16,7 +18,7 @@
 			}
 			
 			foreach($subjects as $subject) {
-				$query="INSERT INTO grade_subject (grade_id, subject_id) VALUES ('$id', '$subject')";
+				$query="INSERT INTO grade_subject (grade_id, subject_id, created_by) VALUES ('$id', '$subject', '$username')";
 			
 				$result=mysqli_query($con,$query);
 			

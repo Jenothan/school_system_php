@@ -1,5 +1,6 @@
 <?php
 	include('../auth/auth_session.php');
+
 	if($_SERVER['REQUEST_METHOD']=='POST'){
 			$father_name=$_POST['father_name'];
 			$student_name=$_POST['student_name'];
@@ -10,7 +11,6 @@
 			$gender=$_POST['gender'];
 			$telephone=$_POST['telephone'];
 			$address=$_POST['address'];
-			$username=$_SESSION['username'];
 			
 			require_once('../config.php');
 			

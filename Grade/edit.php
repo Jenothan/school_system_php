@@ -25,7 +25,7 @@
     <form action="grade/update.php" method="POST"
         class="p-6 rounded-lg w-full">
 
-        <h1 class="text-3xl font-bold mb-6 text-center">Edit Grade</h1>
+        <h1 class="text-3xl font-bold mb-6 text-center"><?php echo $grade_name; ?></h1>
 
         <!-- error msg -->
         <?php if($error==1) { ?>
@@ -73,7 +73,6 @@
         </div>
 
         <div class="flex justify-end gap-4 mt-6">
-          <button type="reset" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Reset</button>
           <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Update</button>
         </div>
 

@@ -1,4 +1,6 @@
 <?php
+	include('../auth/auth_session.php');
+
 	if($_SERVER['REQUEST_METHOD']=='POST'){
 			$id=$_POST['id'];
 			$subject_name=$_POST['subject_name'];
@@ -8,6 +10,8 @@
 			$subject_number=$_POST['subject_number'];
 			
 			require_once('../config.php');
+
+			
 			
 			$check_query="SELECT subject_name, subject_index FROM subjects WHERE id!='$id'";
 			$check_res=mysqli_query($con, $check_query);
@@ -28,7 +32,7 @@
 			}
 			else {
 			
-				$query = "UPDATE subjects SET subject_order = '$subject_order', subject_color = '$subject_color', subject_number = '$subject_number' WHERE id='$id'";	
+				$query = "UPDATE subjects SET subject_order = '$subject_order', subject_color = '$subject_color', subject_number = '$subject_number', updated_by = '$username' WHERE id='$id'";	
 				
 				$result=mysqli_query($con,$query);
 			
