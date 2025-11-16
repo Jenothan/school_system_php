@@ -8,7 +8,8 @@
     else if($error == 3) $error_msg = "Image size grater thaan 2MB";
     else if($error == 4) $error_msg = "Image not found!";
 
-    // Get student info
+    //------------------------------------------------- get student info --------------------------------------
+
     $query = "SELECT * FROM students WHERE id='$id'";
     $result = mysqli_query($con, $query);
     if (!$result) die("Query Failed: " . mysqli_error($con));
@@ -24,7 +25,8 @@
     $telephone = $row['telephone'];
     $address = $row['address'];
 
-    // Get profile image
+    //---------------------------------------------------------- Get profile image ----------------------------------------------
+
     $img_query = "SELECT * FROM images WHERE student_id='$id'";
     $img_res = mysqli_query($con, $img_query);
     $path = "profiles/def.jpg"; // default image
@@ -33,7 +35,8 @@
         $path = substr($img_row['file_name'], 3);
     }
 
-    // Get all grades
+    //--------------------------------------------------------------- get all grades ---------------------------------------------
+    
     $grade_res = mysqli_query($con, "SELECT id, grade_name FROM grades");
 ?>
 
