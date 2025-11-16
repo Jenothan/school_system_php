@@ -48,7 +48,7 @@
 
 <div class="p-6 rounded-lg w-full shadow-xl/30">
 
-    <h1 class="text-3xl font-bold mb-6 text-center">Student Details & Subjects</h1>
+    <h1 class="text-3xl font-bold mb-6 text-center"><?php echo $father_name. ' ' . $student_name; ?> & Subjects</h1>
 
     <table class="w-full border border-[#387281] rounded mb-6">
         <tr class="bg-[#3C7A89] text-white">
