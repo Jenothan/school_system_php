@@ -61,14 +61,14 @@
 					</h1>
 
 					<a href="?page=create-form&section=<?php echo ucfirst($sec); ?>" 
-					class="bg-[#FFBF00] px-6 py-3 text-black font-bold hover:bg-[#CB9800] rounded-[10px]">
+					class="bg-[#FFBF00] px-6 py-3 text-black w-40 hover:bg-[#CB9800] rounded-[10px]">
 					Add <?php echo ucfirst($sec); ?>
 					</a>
 				</div>
 			</th>
 		</tr>
 		
-		<tr style="height: 80%;">
+		<tr style="height: 90%;">
 			<td style="width: 15%;" class="p-3 bg-[#16262E] text-white">
 				<div class="flex flex-col w-full h-full justify-between">
 					<div>
@@ -79,10 +79,15 @@
 						</ul>
 					</div>
 					<div class="flex flex-col w-full gap-4">
-						<div class="w-full flex flex-row justify-start items-end">
-							<img src="<?php echo $user_image_path; ?>" alt="profile image" class="w-16 h-16 rounded-full border-2">
-							<label class="text-xl pl-3"><?php echo ucfirst($user); ?></label>
+						<h1 class="text-2xl">Profile</h1>
+						<div class="w-full flex flex-row justify-center items-center">
+							<img src="./public/bg.jpg" alt="background image" class="w-full h-full  border rounded-lg">
+							<div class="absolute flex flex-col items-center">
+								<img src="<?php echo $user_image_path; ?>" alt="profile image" class="w-20 h-20 object-cover rounded-full border-2">
+								<label class="text-md"><?php echo ucfirst($user); ?></label>
+							</div>
 						</div>
+						
 						<a href="auth/logout.php"><button class="px-5 py-2 w-full bg-gradient-to-br from-red-300 to-red-500 hover:from-red-500 hover:to-red-300 text-white rounded-[10px]">Logout</button></a>
 					</div>
 				</div>
@@ -103,9 +108,9 @@
 				</div>
 			</td>
 		</tr>
-		<tr style="height: 10%;" class="bg-[#2E4756]">
+		<!-- <tr style="height: 10%;" class="bg-[#2E4756]">
 			<td colspan="2" style="width: 100%;" class="text-white text-2xl"><div class="flex justify-center w-full h-full items-center">Footer</div></td>
-		</tr>
+		</tr> -->
 	</table>
 </body>
 

@@ -48,15 +48,15 @@
         $sub_name = mysqli_fetch_assoc($sub_name_res)['subject_name'];
         $subject_ids[] = $sub_name;
     }
-    $subject_string = !empty($subject_ids) ? implode(", ", $subject_ids) : "Subjects not assigned";
+    $subject_string = !empty($subject_ids) ? implode(", ", $subject_ids) : "<div class='flex items-center'> <p class='text-red-700'> Subjects not assigned </p> <a href='?section=student&page=add-sub-form&id=$id' class='ml-8 px-4 py-2 bg-blue-500 text-white rounded-lg'>Add</a></div>";
 ?>
 
 <div class="p-6 rounded-lg w-full">
-    <h1 class="text-3xl font-bold mb-6 text-center">Student Details</h1>
+    <h1 class="text-3xl font-bold mb-6 text-center"><?php echo $father_name. ' ' . $student_name; ?></h1>
 
     <div class="flex justify-center mb-6">
 		<button command="show-modal" commandfor="dialog" >
-        	<img src="<?php echo $path; ?>" alt="profile image" class="w-36 h-36 rounded-full object-cover border border-[#ADD2C2]">
+        	<img src="<?php echo $path; ?>" alt="profile image" class="w-[200px] h-[200px] rounded-full object-cover border border-[#ADD2C2]">
 		</button>
     </div>
 	

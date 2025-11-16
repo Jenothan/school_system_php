@@ -1,90 +1,93 @@
 <?php
 include('../auth/auth_session.php');
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$id = $_POST['id'];
-	$father_name = $_POST['father_name'];
-	$student_name = $_POST['student_name'];
-	$addmission_no = $_POST['addmission_no'];
-	$grade_id = $_POST['grade_id'];
-	$nic = $_POST['nic'];
-	$dob = $_POST['dob'];
-	$gender = $_POST['gender'];
-	$telephone = $_POST['telephone'];
-	$address = $_POST['address'];
-	$username=$_SESSION['username'];
 
-	require_once('../config.php');
-	
-	$check_query="SELECT addmission_no, nic FROM students WHERE (addmission_no='$addmission_no' OR nic='$nic') AND id!='$id'";
-	$check_res=mysqli_query($con, $check_query);
-			
-			if(mysqli_num_rows($check_res)>0) {
-				header('location:../index.php?page=edit&section=student&id='. $id .'&e=1');
-				exit();
-			}
-			else {
+    $id = $_POST['id'];
+    $father_name = $_POST['father_name'];
+    $student_name = $_POST['student_name'];
+    $addmission_no = $_POST['addmission_no'];
+    $grade_id = $_POST['grade_id'];
+    $nic = $_POST['nic'];
+    $dob = $_POST['dob'];
+    $gender = $_POST['gender'];
+    $telephone = $_POST['telephone'];
+    $address = $_POST['address'];
 
-				$query = "UPDATE students SET father_name = '$father_name', student_name = '$student_name', addmission_no = '$addmission_no', grade_id = '$grade_id', nic = '$nic', dob = '$dob', gender = '$gender', telephone = '$telephone', address = '$address', updated_by='$username' WHERE id = '$id'";
+    require_once('../config.php');
 
-				$result = mysqli_query($con, $query);
+    $check_query = "SELECT addmission_no, nic FROM students WHERE (addmission_no='$addmission_no' OR nic='$nic') AND id!='$id'";
 
-				if (!$result) {
-					die("Query failed" . mysqli_error($con));
-				}
-			}
+    $check_res = mysqli_query($con, $check_query);
 
-	//*******************************************************************************************************
+    if (mysqli_num_rows($check_res) > 0) {
+        header("location:../index.php?page=edit&section=student&id=$id&e=1");
+        exit();
+    }
 
-	$target_dir ="../profiles/";
-	$original_name = basename($_FILES['imagefile']['name']);
-	$targetFile = $target_dir . basename($_FILES['imagefile']['name']);
-	$imageFiletype = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-	$size = (int)$_FILES['imagefile']['size'];
-			$maxSize = 2 * 1024 * 1024;
-			echo $size;
-			echo $maxSize;
+    $query = "UPDATE students SET 
+                father_name='$father_name',
+                student_name='$student_name',
+                addmission_no='$addmission_no',
+                grade_id='$grade_id',
+                nic='$nic',
+                dob='$dob',
+                gender='$gender',
+                telephone='$telephone',
+                address='$address',
+                updated_by='$username'
+              WHERE id='$id'";
 
-	$allowedtype = ['jpeg', 'jpg', 'png', 'gif'];
+    mysqli_query($con, $query);
 
 
-	if (in_array($imageFiletype, $allowedtype)) {
-		//print_r($_FILES);
+    if (!empty($_FILES['imagefile']['name'])) {   
 
-		if (move_uploaded_file($_FILES['imagefile']['tmp_name'], $targetFile)) {  //upload image in file path
-			if ($size > $maxSize) {
-				header('location:../index.php?page=edit&section=student&e=3&id=' . $id);
-				exit();
-			}
+        $check_query = "SELECT * FROM images WHERE student_id='$id'";
+        $check_res = mysqli_query($con, $check_query);
 
-			$query = "INSERT INTO images (student_id, file_name, original_name, mime, size) VALUES ('$id', '$targetFile', '$original_name', '$imageFiletype', '$size')";
+        if ($check_row = mysqli_fetch_assoc($check_res)) {
 
-			//-------- Collect student profile image from images table and delete  ----------------->
+            if (file_exists($check_row['file_name'])) {
+                unlink($check_row['file_name']);
+            }
 
-			$image_check_query = "SELECT student_id FROM images WHERE student_id='$id'";
-			$image_check_res = mysqli_query($con, $image_check_query);
-			if (!$image_check_res) {
-				die("query failed!" . mysqli_error($con));
-			}
+            mysqli_query($con, "DELETE FROM images WHERE student_id='$id'");
+        }
 
-			$image_check_row = mysqli_fetch_array($image_check_res);
+        $target_dir = "../profiles/";
+        $original_name = basename($_FILES['imagefile']['name']);
 
-			if (mysqli_num_rows($image_check_res) > 0) {
-				$query = "UPDATE images SET file_name='$targetFile', original_name='$original_name', mime='$imageFiletype', size='$size' WHERE student_id='$id'";
-			}
+        $unique = time() . "_" . uniqid();
+        $targetFile = $target_dir . $unique . "_" . $original_name;
 
-			$image_upload_res = mysqli_query($con, $query);
-			if (!$image_upload_res) {
-				die("query failed" . mysqli_error($con));
-			}
-		} else {
-			header('location:../index.php?page=edit&section=student&e=4&id=' . $id);
-			exit();
-		}
-	} else {
-		header('location:../index.php?page=edit&section=student&e=2&id=' . $id);
-		exit();
-	}
+        $ext = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+        $size = $_FILES['imagefile']['size'];
+        $maxSize = 2 * 1024 * 1024;
 
-	header('location:../index.php?page=edit&section=student&id=' . $id);
-	exit();
+        $allowed = ['jpg', 'jpeg', 'png', 'gif'];
+
+        if (!in_array($ext, $allowed)) {
+            header("location:../index.php?page=edit&section=student&id=$id&e=2");
+            exit();
+        }
+
+        if ($size > $maxSize) {
+            header("location:../index.php?page=edit&section=student&id=$id&e=3");
+            exit();
+        }
+
+        if (!move_uploaded_file($_FILES['imagefile']['tmp_name'], $targetFile)) {
+            header("location:../index.php?page=edit&section=student&id=$id&e=4");
+            exit();
+        }
+
+        $insert = "INSERT INTO images (student_id, file_name, original_name, mime, size) 
+                   VALUES ('$id', '$targetFile', '$original_name', '$ext', '$size')";
+        mysqli_query($con, $insert);
+    }
+
+	header("location:../index.php?page=edit&section=student&id=$id");
+    exit();
 }
+?>

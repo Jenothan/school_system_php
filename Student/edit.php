@@ -39,7 +39,7 @@
 
 <div class="p-6 rounded-lg w-full">
 
-    <h1 class="text-3xl font-bold mb-6 text-center">Edit Student</h1>
+    <h1 class="text-3xl font-bold mb-6 text-center"><?php echo $father_name. ' ' . $student_name; ?></h1>
 
     <?php if($error==1 || $error==2) { ?>
         <div class="bg-red-500 text-white p-3 rounded mb-4">
@@ -51,14 +51,6 @@
     <div class="flex flex-col items-center mb-6">
 
 		<img src="<?php echo $path; ?>" alt="profile image" class="w-36 h-36 rounded-full mb-4 border-2 border-[#ADD2C2] object-cover">
-		<script>
-			function checkSize(file){
-				if (file.files[0].size > 2 * 1024 * 1024){
-					alert("Max 2MB allowed!");
-					file.value = "";
-				}
-			}
-		</script>
 	
 		<div class="flex flex-row items-center justify-center pl-20 gap-4">
 			
@@ -68,8 +60,17 @@
 				<img src="./public/delete.png" alt="delete button" class="w-full h-full">
 			</a>
 
-		
-				<input type="file" name="imagefile" accept="image/*">
+				<input type="file" id="file" name="imagefile" accept="image/*">
+                <script>
+                    const uploadField = document.getElementById("file");
+
+                        uploadField.onchange = function() {
+                            if(this.files[0].size > 2097152) {
+                            alert("File is too big!");
+                            this.value = "";
+                            }
+                        };
+                </script>
 			
 		</div>
 	</div>
@@ -133,8 +134,7 @@
         </table>
 
         <div class="flex justify-end gap-4">
-            <button type="reset" class="px-5 py-2 bg-gray-300 rounded hover:bg-gray-400">Reset</button>
-            <button type="submit" class="px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
+            <button type="submit" class="px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Update</button>
         </div>
 
     </form>

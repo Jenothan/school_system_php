@@ -1,5 +1,7 @@
 <!-- addsub.php -->
 <?php
+	include('../auth/auth_session.php');
+
 	if($_SERVER['REQUEST_METHOD']=='POST'){
 			$id=$_POST['id'];
 			$subjects=$_POST['subjects'];
@@ -19,7 +21,7 @@
 				
 			foreach($subjects as $subject) {
 				if(!in_array($subject, $sub_ids)) {
-					$sub_query="INSERT INTO student_subject (student_id, subject_id) VALUES ('$id', '$subject')";
+					$sub_query="INSERT INTO student_subject (student_id, subject_id, created_by) VALUES ('$id', '$subject', '$username')";
 					$sub_res=mysqli_query($con, $sub_query);
 				}
 			}

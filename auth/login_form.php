@@ -49,14 +49,8 @@
         <!-- Buttons -->
         <div class="flex justify-center space-x-4 pt-4">
           <input 
-            type="reset"
-            value="Reset"
-            class="px-6 py-2 bg-[#2E4756] text-white rounded-md hover:bg-[#385262] cursor-pointer"
-          />
-
-          <input 
             type="submit"
-            value="Submit"
+            value="Login"
             class="px-6 py-2 bg-[#2E4756] text-white rounded-md hover:bg-[#385262] cursor-pointer"
           />
         </div>
