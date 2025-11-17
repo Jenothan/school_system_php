@@ -1,6 +1,6 @@
 <!-- addsub.php -->
 <?php
-	include('../auth/auth_session.php');
+	include('../auth/auth-session.php');
 
 	if($_SERVER['REQUEST_METHOD']=='POST'){
 			$id=$_POST['id'];

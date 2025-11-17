@@ -1,6 +1,6 @@
 <?php
 	$id=$_GET['id'];
-			include('../auth/auth_session.php');
+			include('../auth/auth-session.php');
 			$username=$_SESSION['username'];
 			require_once('../config.php');
 			

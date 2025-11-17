@@ -13,7 +13,7 @@
 
 <body class="bg-light">
 	<?php
-	include('auth/auth_session.php');
+	include('auth/auth-session.php');
 	require_once('./config.php');
 
 	if(isset($_SESSION['username'])) { 
@@ -73,7 +73,12 @@
 				<div class="flex flex-col w-full h-full justify-between">
 					<div>
 						<ul class="flex flex-col mt-3">
-							<a href="?section=grade&page=index"><li class="px-3 py-2 flex flex-row gap-3 hover:bg-[#9FA2B2] rounded-[10px]"><img src="./public/grade.png" alt="grade img" width="20" height="20" class="invert">Grade</li></a>
+							<a href="?section=grade&page=index">
+								<li class="px-3 py-2 flex flex-row gap-3 hover:bg-[#9FA2B2] rounded-[10px]">
+									<img src="./public/grade.png" alt="grade img" width="20" height="20" class="invert">
+									Grade
+								</li>
+							</a>
 							<a href="?section=student&page=index"><li class="px-3 py-2 flex flex-row gap-3 hover:bg-[#9FA2B2] rounded-[10px]"><img src="./public/student.png" alt="grade img" width="20" height="20" class="invert">Student</li></a>
 							<a href="?section=subject&page=index"><li class="px-3 py-2 flex flex-row gap-3 hover:bg-[#9FA2B2] rounded-[10px]"><img src="./public/subject.png" alt="grade img" width="20" height="20" class="invert">Subject</li></a>
 						</ul>

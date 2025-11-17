@@ -13,14 +13,14 @@
       }
     ?>
 
-    <!-- Login Card -->
+    
     <div class="bg-white w-full max-w-lg p-10 rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.3)] border-2 border-[#387281]">
 
       <h1 class="text-3xl font-bold text-center mb-8">Login Form</h1>
 
       <form action="login.php" method="POST" class="space-y-6">
 
-        <!-- Username -->
+        
         <div>
           <label for="username" class="block font-semibold mb-1">Username</label>
           <input 
@@ -33,7 +33,7 @@
           />
         </div>
 
-        <!-- Password -->
+        
         <div>
           <label for="password" class="block font-semibold mb-1">Password</label>
           <input 
@@ -46,7 +46,7 @@
           />
         </div>
 
-        <!-- Buttons -->
+       
         <div class="flex justify-center space-x-4 pt-4">
           <input 
             type="submit"

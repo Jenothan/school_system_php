@@ -56,7 +56,7 @@
 
     <div class="flex justify-center mb-6">
 		<button command="show-modal" commandfor="dialog" >
-        	<img src="<?php echo $path; ?>" alt="profile image" class="w-[200px] h-[200px] rounded-full object-cover border border-[#ADD2C2]">
+        	<img src="<?php echo $path; ?>" alt="profile image" class="w-[200px] h-[200px] rounded-full object-cover border border-[#ADD2C2] hover:scale-105 transition-transform duration-400 ">
 		</button>
     </div>
 	

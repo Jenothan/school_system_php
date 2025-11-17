@@ -3,9 +3,9 @@
         $error = $_GET['e'] ?? 0;
         $error_msg = "Grade Name already exist!";
 
-        $path="/jenothan/school-data/grade/create_grade_form.php";
+        $path="/jenothan/school-data/grade/create-grade-form.php";
         if($_SERVER['PHP_SELF']==$path) {
-            include('../auth/auth_session.php');
+            include('../auth/auth-session.php');
         }
     ?>
 

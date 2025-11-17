@@ -1,7 +1,7 @@
 <?php 
 
     require_once('../config.php');
-    include('../auth/auth_session.php');
+    include('../auth/auth-session.php');
     $id=$_GET['id'];
 	
 		$check_query="SELECT * FROM images WHERE student_id='$id'";

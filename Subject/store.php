@@ -1,5 +1,5 @@
 <?php
-	include('../auth/auth_session.php');
+	include('../auth/auth-session.php');
 
 	if($_SERVER['REQUEST_METHOD']=='POST'){
 			$subject_name=$_POST['subject_name'];
