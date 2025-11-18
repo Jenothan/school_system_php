@@ -10,17 +10,17 @@
 	<table class="min-w-full border border-gray-300 divide-y divide-gray-300 text-sm">
 		<thead class="bg-gray-100">
 			<tr>
-				<th class="px-3 py-2 text-left font-semibold">Profile</th>
-				<th class="px-3 py-2 text-left font-semibold">Father Name</th>
-				<th class="px-3 py-2 text-left font-semibold">Student Name</th>
-				<th class="px-3 py-2 text-left font-semibold">Admission No</th>
-				<th class="px-3 py-2 text-left font-semibold">Grade</th>
-				<th class="px-3 py-2 text-left font-semibold">NIC</th>
-				<th class="px-3 py-2 text-left font-semibold">DOB</th>
-				<th class="px-3 py-2 text-left font-semibold">Gender</th>
-				<th class="px-3 py-2 text-left font-semibold">Telephone</th>
-				<th class="px-3 py-2 text-left font-semibold">Address</th>
-				<th class="px-3 py-2 text-center font-semibold" colspan="4">Actions</th>
+				<th class="px-3 py-2 text-center font-semibold">Profile</th>
+				<th class="px-3 py-2 text-center font-semibold">Father Name</th>
+				<th class="px-3 py-2 text-center font-semibold">Student Name</th>
+				<th class="px-3 py-2 text-center font-semibold">Admission No</th>
+				<th class="px-3 py-2 text-center font-semibold">Grade</th>
+				<th class="px-3 py-2 text-center font-semibold">NIC</th>
+				<!-- <th class="px-3 py-2 text-center font-semibold">DOB</th>
+				<th class="px-3 py-2 text-center font-semibold">Gender</th>
+				<th class="px-3 py-2 text-center font-semibold">Telephone</th>
+				<th class="px-3 py-2 text-center font-semibold">Address</th> -->
+				<th class="px-3 py-2 text-center font-semibold" colspan="3">Actions</th>
 			</tr>
 		</thead>
 
@@ -28,7 +28,7 @@
 			<?php while ($row = mysqli_fetch_array($result)) { 
 				$stu_id=$row['id'];
 			?>
-				<tr class="hover:bg-gray-200 transition cursor-pointer" onclick="window.location='?page=show&section=student&id=<?php echo $row[0]; ?>'">
+				<tr class="hover:bg-gray-200 transition cursor-pointer" title="<?php echo $row['student_name'] . "'s Details"; ?>" onclick="window.location='?page=show&section=student&id=<?php echo $row[0]; ?>'">
 					<?php
 					$path = "profiles/def.jpg";
 					$alt = "default profile image";
@@ -40,14 +40,14 @@
 						$alt = $img_row['original_name'];
 					}
 					?>
-					<td class="px-3 py-2 flex justify-center w-[100px]">
+					<td class="px-3 py-2 flex flex-row justify-center items-center">
 						<img src="<?php echo $path; ?>" alt="<?php echo $alt; ?>"
 							class="w-16 h-16 rounded-full object-cover">
 					</td>
 
-					<td class="px-3 py-2"><?php echo $row['father_name']; ?></td>
-					<td class="px-3 py-2"><?php echo $row['student_name']; ?></td>
-					<td class="px-3 py-2"><?php echo $row['addmission_no']; ?></td>
+					<td class="px-3 py-2 text-center"><?php echo $row['father_name']; ?></td>
+					<td class="px-3 py-2 text-center"><?php echo $row['student_name']; ?></td>
+					<td class="px-3 py-2 text-center"><?php echo $row['addmission_no']; ?></td>
 
 					<?php
 					$grade_n = $row['grade_id'];
@@ -62,34 +62,34 @@
 					$rows = mysqli_fetch_assoc($res);
 					?>
 
-					<td class="px-3 py-2"><?php echo $rows['grade_name']; ?></td>
+					<td class="px-3 py-2 text-center"><?php echo $rows['grade_name']; ?></td>
 
-					<td class="px-3 py-2"><?php echo $row['nic']; ?></td>
-					<td class="px-3 py-2"><?php echo $row['dob']; ?></td>
+					<td class="px-3 py-2 text-center"><?php echo $row['nic']; ?></td>
+					<!-- <td class="px-3 py-2"><?php echo $row['dob']; ?></td>
 					<td class="px-3 py-2"><?php echo $row['gender']; ?></td>
 					<td class="px-3 py-2"><?php echo $row['telephone']; ?></td>
-					<td class="px-3 py-2"><?php echo $row['address']; ?></td>
+					<td class="px-3 py-2"><?php echo $row['address']; ?></td> -->
 
 
 					<td class="px-2">
-						<a href="student/delete.php?id=<?php echo $stu_id; ?>"
+						<a href="student/delete.php?id=<?php echo $stu_id; ?>" title="delete student details"
 							onclick="return confirm('Do you want to delete?')"
-							class="px-3 py-2 text-white bg-red-600 rounded hover:bg-red-700 text-xs">
-							Delete
+							class="flex justify-center items-center py-2 text-white bg-red-500 rounded hover:bg-red-400 text-xs">
+							<img src="./public/bin.png" alt="delete image" class="w-4 h-4 invert">
 						</a>
 					</td>
 
 					<td class="px-2">
-						<a href="?section=student&page=edit&id=<?php echo $stu_id; ?>"
-							class="px-3 py-2 text-white bg-yellow-500 rounded hover:bg-yellow-600 text-xs">
-							Edit
+						<a href="?section=student&page=edit&id=<?php echo $stu_id; ?>" title="Edit student details"
+							class="flex justify-center items-center py-2 text-white bg-yellow-500 rounded hover:bg-yellow-600 text-xs">
+							<img src="./public/edit.png" alt="edit image" class="w-4 h-4 invert">
 						</a>
 					</td>
 
 					<td class="px-2">
-						<a href="?section=student&page=add-sub-form&id=<?php echo $stu_id; ?>"
-							class="px-3 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 text-xs">
-						Subject
+						<a href="?section=student&page=add-sub-form&id=<?php echo $stu_id; ?>" title="Add subjects to the student"
+							class="flex justify-center items-center py-2 text-white bg-blue-600 rounded hover:bg-blue-700 text-xs">
+						<img src="./public/add.png" alt="add image" class="w-4 h-4 invert">
 						</a>
 					</td>
 				</tr>

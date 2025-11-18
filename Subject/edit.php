@@ -17,7 +17,7 @@
     $subject_number = $row['subject_number'];
 ?>
 
-<div class="w-full bg-white p-6 rounded-lg shadow-lg">
+<div class="w-full bg-white p-6 border-2 border-[#387281] rounded-lg shadow-lg">
     <h1 class="text-3xl font-bold mb-6 text-center"><?php echo $subject_name; ?></h1>
 
     <!-- error msg -->
@@ -36,35 +36,35 @@
                 <label for="subject_name" class="font-semibold mb-1">Subject Name</label>
                 <input type="text" name="subject_name" id="subject_name"
                        value="<?php echo $subject_name; ?>" required
-                       class="border border-[#387281] p-2 rounded" />
+                       class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
                 <label for="subject_index" class="font-semibold mb-1">Subject Index</label>
                 <input type="text" name="subject_index" id="subject_index"
                        value="<?php echo $subject_index; ?>" required
-                       class="border border-[#387281] p-2 rounded" />
+                       class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
                 <label for="subject_order" class="font-semibold mb-1">Subject Order</label>
                 <input type="text" name="subject_order" id="subject_order"
                        value="<?php echo $subject_order; ?>" required
-                       class="border border-[#387281] p-2 rounded" />
+                       class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
                 <label for="subject_color" class="font-semibold mb-1">Subject Color</label>
                 <input type="text" name="subject_color" id="subject_color"
                        value="<?php echo $subject_color; ?>" required
-                       class="border border-[#387281] p-2 rounded" />
+                       class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
                 <label for="subject_number" class="font-semibold mb-1">Subject Number</label>
                 <input type="text" name="subject_number" id="subject_number"
                        value="<?php echo $subject_number; ?>" required
-                       class="border border-[#387281] p-2 rounded" />
+                       class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
         </div>

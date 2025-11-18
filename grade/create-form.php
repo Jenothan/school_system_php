@@ -10,7 +10,7 @@
     ?>
 
     <form action="grade/store.php" method="POST"
-        class="p-6 rounded-lg w-full shadow-xl/30">
+        class="p-6 rounded-lg w-full shadow-xl/30 border-2 border-[#387281]">
 
         <h1 class="text-3xl font-bold mb-6 text-center">Create Grade</h1>
 
@@ -26,29 +26,29 @@
             <div class="flex flex-col">
                 <label for="grade_name" class="font-semibold mb-1">Grade Name</label>
                 <input type="text" name="grade_name" id="grade_name"
-                    placeholder="eg: 10A" required
-                    class="border border-[#387281] p-2 rounded" />
+                    placeholder="10A" required
+                    class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
                 <label for="grade_group" class="font-semibold mb-1">Grade Group</label>
                 <input type="text" name="grade_group" id="grade_group"
-                    placeholder="eg: 10" required
-                    class="border border-[#387281] p-2 rounded" />
+                    placeholder="10" required
+                    class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
                 <label for="grade_color" class="font-semibold mb-1">Grade Color</label>
                 <input type="text" name="grade_color" id="grade_color"
-                    placeholder="eg: Green" required
-                    class="border border-[#387281] p-2 rounded" />
+                    placeholder="Green" required
+                    class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
                 <label for="grade_order" class="font-semibold mb-1">Grade Order</label>
                 <input type="text" name="grade_order" id="grade_order"
-                    placeholder="eg: 1, 2, 3" required
-                    class="border border-[#387281] p-2 rounded" />
+                    placeholder="1.00" required
+                    class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
         </div>
