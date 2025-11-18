@@ -34,7 +34,7 @@
     if (!$res) die("Query Failed! " . mysqli_error($con));
     ?>
 
-    <div class="p-6 rounded-lg w-full shadow-xl/30">
+    <div class="p-6 rounded-lg w-full shadow-xl/30 border-2 border-gray-300">
 
         <h1 class="text-3xl font-bold mb-6 text-center"><?php echo $grade_name; ?> & Subjects</h1>
 

@@ -14,8 +14,17 @@
     $subject_number = $row['subject_number'];
 ?>
 
-<div class="w-full bg-white p-6">
+<div class="w-full bg-white rounded p-6">
     <h1 class="text-3xl font-bold mb-6 text-center"><?php echo $subject_name; ?></h1>
+
+    <div class="w-full flex justify-end items-end mb-4">
+        <a href="?section=subject&page=edit&id=<?php echo $id; ?>" 
+		    class="px-5 py-2 bg-gradient-to-br from-yellow-300 to-yellow-500 
+                  hover:from-yellow-500 hover:to-yellow-300
+                  text-black font-semibold rounded-[10px]">
+            Edit
+        </a>
+    </div>
 
     <table class="w-full border border-[#387281] rounded">
         <tr class="bg-[#3C7A89] text-white">
@@ -50,16 +59,6 @@
             <td class="p-3 text-lg"><?php echo $subject_number; ?></td>
         </tr>
     </table>
-
-    
-    <div class="flex justify-end mt-6">
-        <a href="?page=edit&section=subject&id=<?php echo $id; ?>"
-           class="px-5 py-2 bg-gradient-to-br from-yellow-300 to-yellow-500 
-                  hover:from-yellow-500 hover:to-yellow-300
-                  text-black font-semibold rounded-[10px]">
-           Edit
-        </a>
-    </div>
 </div>
 
 </body>

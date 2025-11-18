@@ -48,7 +48,7 @@
         $sub_name = mysqli_fetch_assoc($sub_name_res)['subject_name'];
         $subject_ids[] = $sub_name;
     }
-    $subject_string = !empty($subject_ids) ? implode(", ", $subject_ids) : "<div class='flex items-center'> <p class='text-red-700'> Subjects not assigned </p> <a href='?section=student&page=add-sub-form&id=$id' class='ml-8 px-4 py-2 bg-blue-500 text-white rounded-lg'>Add</a></div>";
+    $subject_string = !empty($subject_ids) ? implode(", ", $subject_ids) : "<div class='flex items-center'> <p class='text-red-700'> Subjects not assigned </p> <a href='?section=student&page=add-sub-form&id=$id' title='Add new subjects to the student' class='ml-8 px-4 py-2 bg-blue-500 text-white rounded-lg'><img src='./public/add.png' alt='add image' class='w-4 h-4 invert'></a></div>";
 ?>
 
 <div class="p-6 rounded-lg w-full">
@@ -56,10 +56,18 @@
 
     <div class="flex justify-center mb-6">
 		<button command="show-modal" commandfor="dialog" >
-        	<img src="<?php echo $path; ?>" alt="profile image" class="w-[200px] h-[200px] rounded-full object-cover border border-[#ADD2C2]">
+        	<img src="<?php echo $path; ?>" alt="profile image" class="w-[200px] h-[200px] rounded-full object-cover border border-[#ADD2C2] hover:scale-105 transition-transform duration-400 ">
 		</button>
     </div>
-	
+
+    <div class="w-full flex justify-end items-end mb-4">
+        <a href="?section=student&page=edit&id=<?php echo $id; ?>" 
+		    class="px-5 py-2 bg-gradient-to-br from-yellow-300 to-yellow-500 
+                  hover:from-yellow-500 hover:to-yellow-300
+                  text-black font-semibold rounded-[10px]">
+            Edit
+        </a>
+    </div>
 
     <table class="w-full border border-[#387281] rounded">
         <tr class="bg-[#3C7A89] text-white">
@@ -109,10 +117,7 @@
     </table>
 
     <div class="flex justify-end mt-4">
-        <a href="?section=student&page=edit&id=<?php echo $id; ?>" 
-		class="px-5 py-2 bg-gradient-to-br from-yellow-300 to-yellow-500 
-                  hover:from-yellow-500 hover:to-yellow-300
-                  text-black font-semibold rounded-[10px]">Edit</a>
+        
     </div>
 </div>
 

@@ -5,7 +5,7 @@
     ?>
 
     <form action="subject/store.php" method="POST"
-        class="p-6 rounded-lg w-full">
+        class="p-6 rounded-lg w-full border-2 border-[#387281]">
 
         <h1 class="text-3xl font-bold mb-6 text-center">Create Subject</h1>
 
@@ -21,36 +21,36 @@
             <div class="flex flex-col">
                 <label for="subject_name" class="font-semibold mb-1">Subject Name</label>
                 <input type="text" name="subject_name" id="subject_name"
-                    placeholder="Enter the Subject Name" required
-                    class="border border-[#387281] p-2 rounded" />
+                    placeholder="English" required
+                    class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
                 <label for="subject_index" class="font-semibold mb-1">Subject Index</label>
                 <input type="text" name="subject_index" id="subject_index"
-                    placeholder="eg: 14363" required
-                    class="border border-[#387281] p-2 rounded" />
+                    placeholder="14363" required
+                    class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
                 <label for="subject_order" class="font-semibold mb-1">Subject Order</label>
                 <input type="text" name="subject_order" id="subject_order"
-                    placeholder="eg: 1, 2, 3" required
-                    class="border border-[#387281] p-2 rounded" />
+                    placeholder="3.00" required
+                    class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
                 <label for="subject_color" class="font-semibold mb-1">Subject Color</label>
                 <input type="text" name="subject_color" id="subject_color"
-                    placeholder="eg: Green" required
-                    class="border border-[#387281] p-2 rounded" />
+                    placeholder="Green" required
+                    class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
                 <label for="subject_number" class="font-semibold mb-1">Subject Number</label>
                 <input type="text" name="subject_number" id="subject_number"
-                    placeholder="eg: 54" required
-                    class="border border-[#387281] p-2 rounded" />
+                    placeholder="54" required
+                    class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
         </div>

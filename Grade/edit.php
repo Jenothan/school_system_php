@@ -23,7 +23,7 @@
     ?>
 
     <form action="grade/update.php" method="POST"
-        class="p-6 rounded-lg w-full">
+        class="p-6 rounded-lg w-full border-2 border-[#387281]">
 
         <h1 class="text-3xl font-bold mb-6 text-center"><?php echo $grade_name; ?></h1>
 
@@ -43,7 +43,7 @@
                 <input type="text" name="grade_name" id="grade_name"
                        value="<?php echo $grade_name; ?>"
                        required
-                       class="border border-[#387281] p-2 rounded" />
+                       class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
@@ -51,7 +51,7 @@
                 <input type="text" name="grade_group" id="grade_group"
                        value="<?php echo $grade_group; ?>"
                        required
-                       class="border border-[#387281] p-2 rounded" />
+                       class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
@@ -59,7 +59,7 @@
                 <input type="text" name="grade_color" id="grade_color"
                        value="<?php echo $grade_color; ?>"
                        required
-                       class="border border-[#387281] p-2 rounded" />
+                       class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
             <div class="flex flex-col">
@@ -67,7 +67,7 @@
                 <input type="text" name="grade_order" id="grade_order"
                        value="<?php echo $grade_order; ?>"
                        required
-                       class="border border-[#387281] p-2 rounded" />
+                       class="border-2 border-gray-300 p-2 rounded" />
             </div>
 
         </div>

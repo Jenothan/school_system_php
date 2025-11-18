@@ -1,5 +1,5 @@
 <?php
-include('../auth/auth_session.php');
+include('../auth/auth-session.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -57,17 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $target_dir = "../profiles/";
         $original_name = basename($_FILES['imagefile']['name']);
-
-        $unique = time() . "_" . uniqid();
-        $targetFile = $target_dir . $unique . "_" . $original_name;
-
-        $ext = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+        $targetFile = $target_dir.$original_name;
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
         $size = $_FILES['imagefile']['size'];
         $maxSize = 2 * 1024 * 1024;
 
         $allowed = ['jpg', 'jpeg', 'png', 'gif'];
 
-        if (!in_array($ext, $allowed)) {
+        if (!in_array($imageFileType, $allowed)) {
             header("location:../index.php?page=edit&section=student&id=$id&e=2");
             exit();
         }
@@ -83,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         $insert = "INSERT INTO images (student_id, file_name, original_name, mime, size) 
-                   VALUES ('$id', '$targetFile', '$original_name', '$ext', '$size')";
+                   VALUES ('$id', '$targetFile', '$original_name', '$imageFileType', '$size')";
         mysqli_query($con, $insert);
     }
 

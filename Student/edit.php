@@ -7,8 +7,10 @@
     else if($error == 2) $error_msg = "Image type not acceptable!";
     else if($error == 3) $error_msg = "Image size grater thaan 2MB";
     else if($error == 4) $error_msg = "Image not found!";
+    else if($error == 5) $error_msg = "There is no image to delete!";
 
-    // Get student info
+    //------------------------------------------------- get student info --------------------------------------
+
     $query = "SELECT * FROM students WHERE id='$id'";
     $result = mysqli_query($con, $query);
     if (!$result) die("Query Failed: " . mysqli_error($con));
@@ -24,7 +26,8 @@
     $telephone = $row['telephone'];
     $address = $row['address'];
 
-    // Get profile image
+    //---------------------------------------------------------- Get profile image ----------------------------------------------
+
     $img_query = "SELECT * FROM images WHERE student_id='$id'";
     $img_res = mysqli_query($con, $img_query);
     $path = "profiles/def.jpg"; // default image
@@ -33,15 +36,16 @@
         $path = substr($img_row['file_name'], 3);
     }
 
-    // Get all grades
+    //--------------------------------------------------------------- get all grades ---------------------------------------------
+    
     $grade_res = mysqli_query($con, "SELECT id, grade_name FROM grades");
 ?>
 
-<div class="p-6 rounded-lg w-full">
+<div class="p-6 rounded-lg w-full border-2 border-[#387281]">
 
     <h1 class="text-3xl font-bold mb-6 text-center"><?php echo $father_name. ' ' . $student_name; ?></h1>
 
-    <?php if($error==1 || $error==2) { ?>
+    <?php if($error!=0) { ?>
         <div class="bg-red-500 text-white p-3 rounded mb-4">
             <?php echo $error_msg; ?>
         </div>
@@ -85,20 +89,20 @@
             </tr>
             <tr class="border-t">
                 <td class="p-3 font-semibold border-r border-[#387281]">Father Name</td>
-                <td class="p-3"><input type="text" name="father_name" value="<?php echo $father_name; ?>" class="w-full border border-[#387281] p-2 rounded" required></td>
+                <td class="p-3"><input type="text" name="father_name" value="<?php echo $father_name; ?>" class="w-full border-2 border-gray-300 p-2 rounded" required></td>
             </tr>
             <tr class="border-t">
                 <td class="p-3 font-semibold border-r border-[#387281]">Student Name</td>
-                <td class="p-3"><input type="text" name="student_name" value="<?php echo $student_name; ?>" class="w-full border border-[#387281] p-2 rounded" required></td>
+                <td class="p-3"><input type="text" name="student_name" value="<?php echo $student_name; ?>" class="w-full border-2 border-gray-300 p-2 rounded" required></td>
             </tr>
             <tr class="border-t">
                 <td class="p-3 font-semibold border-r border-[#387281]">Admission No</td>
-                <td class="p-3"><input type="text" name="addmission_no" value="<?php echo $addmission_no; ?>" class="w-full border border-[#387281] p-2 rounded" required></td>
+                <td class="p-3"><input type="text" name="addmission_no" value="<?php echo $addmission_no; ?>" class="w-full border-2 border-gray-300 p-2 rounded" required></td>
             </tr>
             <tr class="border-t">
                 <td class="p-3 font-semibold border-r border-[#387281]">Grade</td>
                 <td class="p-3">
-                    <select name="grade_id" class="w-full border border-[#387281] p-2 rounded" required>
+                    <select name="grade_id" class="w-full border-2 border-gray-300 p-2 rounded" required>
                         <option value="" disabled>Select your Grade</option>
                         <?php while($grade_row = mysqli_fetch_assoc($grade_res)) { ?>
                             <option value="<?php echo $grade_row['id']; ?>" <?php echo $grade_row['id']==$grade_id?'selected':''; ?>>
@@ -110,11 +114,11 @@
             </tr>
             <tr class="border-t">
                 <td class="p-3 font-semibold border-r border-[#387281]">NIC</td>
-                <td class="p-3"><input type="text" name="nic" value="<?php echo $nic; ?>" class="w-full border border-[#387281] p-2 rounded" required></td>
+                <td class="p-3"><input type="text" name="nic" value="<?php echo $nic; ?>" class="w-full border-2 border-gray-300 p-2 rounded" required></td>
             </tr>
             <tr class="border-t">
                 <td class="p-3 font-semibold border-r border-[#387281]">Date of Birth</td>
-                <td class="p-3"><input type="date" name="dob" value="<?php echo $dob; ?>" class="w-full border border-[#387281] p-2 rounded" required></td>
+                <td class="p-3"><input type="date" name="dob" value="<?php echo $dob; ?>" class="w-full border-2 border-gray-300 p-2 rounded" required></td>
             </tr>
             <tr class="border-t">
                 <td class="p-3 font-semibold border-r border-[#387281]">Gender</td>
@@ -125,11 +129,11 @@
             </tr>
             <tr class="border-t">
                 <td class="p-3 font-semibold border-r border-[#387281]">Address</td>
-                <td class="p-3"><textarea name="address" rows="3" class="w-full border border-[#387281] p-2 rounded" required><?php echo $address; ?></textarea></td>
+                <td class="p-3"><textarea name="address" rows="3" class="w-full border-2 border-gray-300 p-2 rounded" required><?php echo $address; ?></textarea></td>
             </tr>
             <tr class="border-t">
                 <td class="p-3 font-semibold border-r border-[#387281]">Telephone</td>
-                <td class="p-3"><input type="tel" name="telephone" value="<?php echo $telephone; ?>" class="w-full border border-[#387281] p-2 rounded" required></td>
+                <td class="p-3"><input type="tel" name="telephone" value="<?php echo $telephone; ?>" class="w-full border-2 border-gray-300 p-2 rounded" required></td>
             </tr>
         </table>
 

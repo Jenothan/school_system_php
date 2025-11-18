@@ -11,9 +11,9 @@
 		
 </head>
 
-<body class="bg-light">
+<body class="bg-light select-none">
 	<?php
-	include('auth/auth_session.php');
+	include('auth/auth-session.php');
 	require_once('./config.php');
 
 	if(isset($_SESSION['username'])) { 
@@ -60,9 +60,9 @@
 						<?php echo ucfirst($sec) . " Details" ?>
 					</h1>
 
-					<a href="?page=create-form&section=<?php echo ucfirst($sec); ?>" 
+					<a href="?page=create-form&section=<?php echo ucfirst($sec); ?>" title="<?php echo "Add New " . ucfirst($sec) . " Details"; ?>"
 					class="bg-[#FFBF00] px-6 py-3 text-black w-40 hover:bg-[#CB9800] rounded-[10px]">
-					Add <?php echo ucfirst($sec); ?>
+					+ Add <?php echo ucfirst($sec); ?>
 					</a>
 				</div>
 			</th>
@@ -70,17 +70,35 @@
 		
 		<tr style="height: 90%;">
 			<td style="width: 15%;" class="p-3 bg-[#16262E] text-white">
-				<div class="flex flex-col w-full h-full justify-between">
+				<div class="flex flex-col w-full h-full justify-between py-3">
 					<div>
-						<ul class="flex flex-col mt-3">
-							<a href="?section=grade&page=index"><li class="px-3 py-2 flex flex-row gap-3 hover:bg-[#9FA2B2] rounded-[10px]"><img src="./public/grade.png" alt="grade img" width="20" height="20" class="invert">Grade</li></a>
-							<a href="?section=student&page=index"><li class="px-3 py-2 flex flex-row gap-3 hover:bg-[#9FA2B2] rounded-[10px]"><img src="./public/student.png" alt="grade img" width="20" height="20" class="invert">Student</li></a>
-							<a href="?section=subject&page=index"><li class="px-3 py-2 flex flex-row gap-3 hover:bg-[#9FA2B2] rounded-[10px]"><img src="./public/subject.png" alt="grade img" width="20" height="20" class="invert">Subject</li></a>
+						<ul class="flex flex-col gap-2">
+
+							<a href="?section=grade&page=index">
+								<li class="px-3 py-2 flex flex-row gap-3 <?php echo $sec=='grade' ? 'bg-[#3C7A89]' : '';  ?> hover:bg-[#448A9C] rounded">
+									<img src="./public/grade.png" alt="grade img" width="20" height="20" class="invert">
+									Grade
+								</li>
+							</a>
+							<a href="?section=student&page=index">
+								<li class="px-3 py-2 flex flex-row gap-3 <?php echo $sec=='student' ? 'bg-[#3C7A89]' : '';  ?> hover:bg-[#448A9C] rounded">
+									<img src="./public/student.png" alt="grade img" width="20" height="20" class="invert">
+									Student
+								</li>
+							</a>
+
+							<a href="?section=subject&page=index">
+								<li class="px-3 py-2 flex flex-row gap-3 <?php echo $sec=='subject' ? 'bg-[#3C7A89]' : '';  ?> hover:bg-[#448A9C] rounded">
+									<img src="./public/subject.png" alt="grade img" width="20" height="20" class="invert">
+									Subject
+								</li>
+							</a>
+							
 						</ul>
 					</div>
 					<div class="flex flex-col w-full gap-4">
 						<h1 class="text-2xl">Profile</h1>
-						<div class="w-full flex flex-row justify-center items-center">
+						<div class="w-full flex flex-row justify-center items-center"  title="Admin Profile Details">
 							<img src="./public/bg.jpg" alt="background image" class="w-full h-full  border rounded-lg">
 							<div class="absolute flex flex-col items-center">
 								<img src="<?php echo $user_image_path; ?>" alt="profile image" class="w-20 h-20 object-cover rounded-full border-2">
@@ -88,7 +106,11 @@
 							</div>
 						</div>
 						
-						<a href="auth/logout.php"><button class="px-5 py-2 w-full bg-gradient-to-br from-red-300 to-red-500 hover:from-red-500 hover:to-red-300 text-white rounded-[10px]">Logout</button></a>
+						<a href="auth/logout.php"
+						 class="flex flex-row justify-center items-center gap-3 px-5 py-2 w-full bg-red-500 hover:bg-red-400 text-white rounded">
+							Logout
+							<img src="./public/out.png" alt="logout img" width="20" height="20" class="invert">
+						</a>
 					</div>
 				</div>
 			</td>

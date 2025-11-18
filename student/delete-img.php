@@ -1,7 +1,7 @@
 <?php 
 
     require_once('../config.php');
-    include('../auth/auth_session.php');
+    include('../auth/auth-session.php');
     $id=$_GET['id'];
 	
 		$check_query="SELECT * FROM images WHERE student_id='$id'";
@@ -29,7 +29,7 @@
         header('location:../index.php?page=edit&section=student&id=' . $id);	
 		exit();
 	} else {
-			header('location:../index.php?page=edit&section=student&id=' . $id . '&e=2');	
+			header('location:../index.php?page=edit&section=student&id=' . $id . '&e=5');	
 	}
 				
 ?>
