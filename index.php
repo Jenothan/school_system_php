@@ -49,29 +49,16 @@
 	?>
 
 	<table style="width: 100%; height: 100%;">
-		<tr style="height: 10%;" class="bg-[#2E4756]">
-			<th colspan="2" class="p-3">
-				<div class="flex flex-row justify-between items-center px-4 py-2">
-					<div class="flex justify-center items-center gap-3">
-						<img src="./public/school.png" alt="school logo" class="w-8 h-8 invert">
-						<h2 class="text-3xl text-white">Menu</h2>
-					</div>
-					<h1 class="text-4xl text-white">
-						<?php echo ucfirst($sec) . " Details" ?>
-					</h1>
-
-					<a href="?page=create-form&section=<?php echo ucfirst($sec); ?>" title="<?php echo "Add New " . ucfirst($sec) . " Details"; ?>"
-					class="bg-[#FFBF00] px-6 py-3 text-black w-40 hover:bg-[#CB9800] rounded-[10px]">
-					+ Add <?php echo ucfirst($sec); ?>
-					</a>
-				</div>
-			</th>
-		</tr>
-		
-		<tr style="height: 90%;">
-			<td style="width: 15%;" class="p-3 bg-[#16262E] text-white">
+		<tr style="height: 100%;">
+			<td style="width: 15%; height: 100%;" class="fixed p-3 bg-[#16262E] text-white">
 				<div class="flex flex-col w-full h-full justify-between py-3">
+					
 					<div>
+						<div class="flex justify-center items-center gap-3 mb-3">
+							<img src="./public/school.png" alt="school logo" class="w-8 h-8 invert">
+							<h2 class="text-3xl text-white">Menu</h2>
+						</div>
+						<hr>
 						<ul class="flex flex-col gap-2">
 
 							<a href="?section=grade&page=index">
@@ -114,25 +101,35 @@
 					</div>
 				</div>
 			</td>
-			<td style="width: 85%;">
-				<div class="overflow-auto hide-scrollbar h-full p-2">
-					<?php 
+			<td style="width: 85%; height: 100%;">
 
-					//---------------- include file path -----------------------------------
+    <div class="fixed top-0 left-[226px] right-0 flex flex-row bg-[#2E4756] justify-between items-center px-4 py-3 z-50">
+        
 
-							if (file_exists($path)) {
-								include_once($path);
-							} else {
-								echo "<h1>404 page not found</h1>";
-							}
+        <h1 class="text-4xl text-white">
+            <?php echo ucfirst($sec) . " Details" ?>
+        </h1>
 
-					?>
-				</div>
-			</td>
+        <a href="?page=create-form&section=<?php echo ucfirst($sec); ?>" 
+           title="<?php echo "Add New " . ucfirst($sec) . " Details"; ?>"
+           class="bg-[#FFBF00] px-6 py-3 text-black w-40 hover:bg-[#CB9800] rounded-[10px]">
+           + Add <?php echo ucfirst($sec); ?>
+        </a>
+    </div>
+
+    <div class="overflow-auto hide-scrollbar bg-white p-2 pt-20">
+        <?php 
+            if (file_exists($path)) {
+                include_once($path);
+            } else {
+                echo "<h1>404 page not found</h1>";
+            }
+        ?>
+    </div>
+
+</td>
+
 		</tr>
-		<!-- <tr style="height: 10%;" class="bg-[#2E4756]">
-			<td colspan="2" style="width: 100%;" class="text-white text-2xl"><div class="flex justify-center w-full h-full items-center">Footer</div></td>
-		</tr> -->
 	</table>
 </body>
 
