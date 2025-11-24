@@ -97,10 +97,10 @@
                         <h1>Profile</h1>
                         
                         <div title="Admin Profile Details" >
-                            <img src="./public/bg.jpg" alt="background image" class="position-relative">
-                            <div class="position-absolute top-50 start-50 translate-middle bg-info p-2">
+                            <img src="./public/bg.jpg" alt="background image" class="position-relative w-25 h-25">
+                            <div class="position-absolute p-2">
                                 <img src="<?php echo $user_image_path; ?>" 
-                                     alt="profile image" width=80 height=80 />
+                                     alt="profile image" width="80" height="80" />
                                 <label><?php echo ucfirst($user); ?></label>
                             </div>
                         </div>
