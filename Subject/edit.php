@@ -1,4 +1,4 @@
-<body class="bg-gray-50 p-6">
+<body>
 
 <?php 
     $id = $_GET['id'];
@@ -17,61 +17,58 @@
     $subject_number = $row['subject_number'];
 ?>
 
-<div class="w-full bg-white p-6 border-2 border-[#387281] rounded-lg shadow-lg">
-    <h1 class="text-3xl font-bold mb-6 text-center"><?php echo $subject_name; ?></h1>
+<div>
+
+    <h1><?php echo $subject_name; ?></h1>
 
     <!-- error msg -->
     <?php if($error==1) { ?>
-        <div class="bg-red-500 text-white p-3 rounded mb-4 text-center">
+        <div>
             <?php echo $error_msg; ?>
         </div>
     <?php } ?>
 
-    <form action="subject/update.php" method="POST" class="space-y-4">
+    <form action="subject/update.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
 
-        <div class="grid grid-cols-3 gap-4">
+        <div>
 
-            <div class="flex flex-col">
-                <label for="subject_name" class="font-semibold mb-1">Subject Name</label>
+            <div>
+                <label for="subject_name">Subject Name</label>
                 <input type="text" name="subject_name" id="subject_name"
-                       value="<?php echo $subject_name; ?>" required
-                       class="border-2 border-gray-300 p-2 rounded" />
+                       value="<?php echo $subject_name; ?>" required />
             </div>
 
-            <div class="flex flex-col">
-                <label for="subject_index" class="font-semibold mb-1">Subject Index</label>
+            <div>
+                <label for="subject_index">Subject Index</label>
                 <input type="text" name="subject_index" id="subject_index"
-                       value="<?php echo $subject_index; ?>" required
-                       class="border-2 border-gray-300 p-2 rounded" />
+                       value="<?php echo $subject_index; ?>" required />
             </div>
 
-            <div class="flex flex-col">
-                <label for="subject_order" class="font-semibold mb-1">Subject Order</label>
+            <div>
+                <label for="subject_order">Subject Order</label>
                 <input type="text" name="subject_order" id="subject_order"
-                       value="<?php echo $subject_order; ?>" required
-                       class="border-2 border-gray-300 p-2 rounded" />
+                       value="<?php echo $subject_order; ?>" required />
             </div>
 
-            <div class="flex flex-col">
-                <label for="subject_color" class="font-semibold mb-1">Subject Color</label>
+            <div>
+                <label for="subject_color">Subject Color</label>
                 <input type="text" name="subject_color" id="subject_color"
-                       value="<?php echo $subject_color; ?>" required
-                       class="border-2 border-gray-300 p-2 rounded" />
+                       value="<?php echo $subject_color; ?>" required />
             </div>
 
-            <div class="flex flex-col">
-                <label for="subject_number" class="font-semibold mb-1">Subject Number</label>
+            <div>
+                <label for="subject_number">Subject Number</label>
                 <input type="text" name="subject_number" id="subject_number"
-                       value="<?php echo $subject_number; ?>" required
-                       class="border-2 border-gray-300 p-2 rounded" />
+                       value="<?php echo $subject_number; ?>" required />
             </div>
 
         </div>
 
-        <div class="flex justify-end gap-4 mt-6">
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Update</button>
+        <div>
+            <button type="submit">Update</button>
         </div>
+
     </form>
 </div>
 

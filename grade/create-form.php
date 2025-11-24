@@ -9,53 +9,48 @@
         }
     ?>
 
-    <form action="grade/store.php" method="POST"
-        class="p-6 rounded-lg w-full shadow-xl/30 border-2 border-[#387281]">
+    <form action="grade/store.php" method="POST">
 
-        <h1 class="text-3xl font-bold mb-6 text-center">Create Grade</h1>
+        <h1>Create Grade</h1>
 
         <!-- error msg -->
         <?php if($error==1) { ?>
-            <div class="bg-red-500 text-white p-3 rounded mb-4 text-center">
+            <div>
                 <?php echo $error_msg; ?>
             </div>
         <?php } ?>
 
-        <div class="grid grid-cols-3 gap-5">
+        <div>
 
-            <div class="flex flex-col">
-                <label for="grade_name" class="font-semibold mb-1">Grade Name</label>
+            <div>
+                <label for="grade_name">Grade Name</label>
                 <input type="text" name="grade_name" id="grade_name"
-                    placeholder="10A" required
-                    class="border-2 border-gray-300 p-2 rounded" />
+                       placeholder="10A" required />
             </div>
 
-            <div class="flex flex-col">
-                <label for="grade_group" class="font-semibold mb-1">Grade Group</label>
+            <div>
+                <label for="grade_group">Grade Group</label>
                 <input type="text" name="grade_group" id="grade_group"
-                    placeholder="10" required
-                    class="border-2 border-gray-300 p-2 rounded" />
+                       placeholder="10" required />
             </div>
 
-            <div class="flex flex-col">
-                <label for="grade_color" class="font-semibold mb-1">Grade Color</label>
+            <div>
+                <label for="grade_color">Grade Color</label>
                 <input type="text" name="grade_color" id="grade_color"
-                    placeholder="Green" required
-                    class="border-2 border-gray-300 p-2 rounded" />
+                       placeholder="Green" required />
             </div>
 
-            <div class="flex flex-col">
-                <label for="grade_order" class="font-semibold mb-1">Grade Order</label>
+            <div>
+                <label for="grade_order">Grade Order</label>
                 <input type="text" name="grade_order" id="grade_order"
-                    placeholder="1.00" required
-                    class="border-2 border-gray-300 p-2 rounded" />
+                       placeholder="1.00" required />
             </div>
 
         </div>
 
-        <div class="flex justify-end gap-4 mt-6">
-          <button type="reset" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Reset</button>
-          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
+        <div>
+          <button type="reset">Reset</button>
+          <button type="submit">Save</button>
         </div>
 
     </form>

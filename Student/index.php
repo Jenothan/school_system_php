@@ -7,28 +7,28 @@
 		die(mysqli_error($con));
 	}
 	?>
-	<table class="min-w-full border border-gray-300 divide-y divide-gray-300 text-sm">
-		<thead class="bg-gray-100">
+	<table border="1" >
+		<thead>
 			<tr>
-				<th class="px-3 py-2 text-center font-semibold">Profile</th>
-				<th class="px-3 py-2 text-center font-semibold">Father Name</th>
-				<th class="px-3 py-2 text-center font-semibold">Student Name</th>
-				<th class="px-3 py-2 text-center font-semibold">Admission No</th>
-				<th class="px-3 py-2 text-center font-semibold">Grade</th>
-				<th class="px-3 py-2 text-center font-semibold">NIC</th>
-				<!-- <th class="px-3 py-2 text-center font-semibold">DOB</th>
-				<th class="px-3 py-2 text-center font-semibold">Gender</th>
-				<th class="px-3 py-2 text-center font-semibold">Telephone</th>
-				<th class="px-3 py-2 text-center font-semibold">Address</th> -->
-				<th class="px-3 py-2 text-center font-semibold" colspan="3">Actions</th>
+				<th>Profile</th>
+				<th>Father Name</th>
+				<th>Student Name</th>
+				<th>Admission No</th>
+				<th>Grade</th>
+				<th>NIC</th>
+				<!-- <th>DOB</th>
+				<th>Gender</th>
+				<th>Telephone</th>
+				<th>Address</th> -->
+				<th colspan="3">Actions</th>
 			</tr>
 		</thead>
 
-		<tbody class="divide-y divide-gray-200">
+		<tbody>
 			<?php while ($row = mysqli_fetch_array($result)) { 
 				$stu_id=$row['id'];
 			?>
-				<tr class="hover:bg-gray-200 transition cursor-pointer" title="<?php echo $row['student_name'] . "'s Details"; ?>" onclick="window.location='?page=show&section=student&id=<?php echo $row[0]; ?>'">
+				<tr title="<?php echo $row['student_name'] . "'s Details"; ?>" onclick="window.location='?page=show&section=student&id=<?php echo $row[0]; ?>'">
 					<?php
 					$path = "profiles/def.jpg";
 					$alt = "default profile image";
@@ -40,14 +40,14 @@
 						$alt = $img_row['original_name'];
 					}
 					?>
-					<td class="px-3 py-2 flex flex-row justify-center items-center">
+					<td>
 						<img src="<?php echo $path; ?>" alt="<?php echo $alt; ?>"
-							class="w-16 h-16 rounded-full object-cover">
+						>
 					</td>
 
-					<td class="px-3 py-2 text-center"><?php echo $row['father_name']; ?></td>
-					<td class="px-3 py-2 text-center"><?php echo $row['student_name']; ?></td>
-					<td class="px-3 py-2 text-center"><?php echo $row['addmission_no']; ?></td>
+					<td><?php echo $row['father_name']; ?></td>
+					<td><?php echo $row['student_name']; ?></td>
+					<td><?php echo $row['addmission_no']; ?></td>
 
 					<?php
 					$grade_n = $row['grade_id'];
@@ -62,34 +62,34 @@
 					$rows = mysqli_fetch_assoc($res);
 					?>
 
-					<td class="px-3 py-2 text-center"><?php echo $rows['grade_name']; ?></td>
+					<td><?php echo $rows['grade_name']; ?></td>
 
-					<td class="px-3 py-2 text-center"><?php echo $row['nic']; ?></td>
-					<!-- <td class="px-3 py-2"><?php echo $row['dob']; ?></td>
-					<td class="px-3 py-2"><?php echo $row['gender']; ?></td>
-					<td class="px-3 py-2"><?php echo $row['telephone']; ?></td>
-					<td class="px-3 py-2"><?php echo $row['address']; ?></td> -->
+					<td><?php echo $row['nic']; ?></td>
+					<!-- <td><?php echo $row['dob']; ?></td>
+					<td><?php echo $row['gender']; ?></td>
+					<td><?php echo $row['telephone']; ?></td>
+					<td><?php echo $row['address']; ?></td> -->
 
 
-					<td class="px-2">
+					<td>
 						<a href="student/delete.php?id=<?php echo $stu_id; ?>" title="delete student details"
 							onclick="return confirm('Do you want to delete?')"
-							class="flex justify-center items-center py-2 text-white bg-red-500 rounded hover:bg-red-400 text-xs">
-							<img src="./public/bin.png" alt="delete image" class="w-4 h-4 invert">
+							>
+							<img src="./public/bin.png" alt="delete image" >
 						</a>
 					</td>
 
-					<td class="px-2">
+					<td>
 						<a href="?section=student&page=edit&id=<?php echo $stu_id; ?>" title="Edit student details"
-							class="flex justify-center items-center py-2 text-white bg-yellow-500 rounded hover:bg-yellow-600 text-xs">
-							<img src="./public/edit.png" alt="edit image" class="w-4 h-4 invert">
+							>
+							<img src="./public/edit.png" alt="edit image" >
 						</a>
 					</td>
 
-					<td class="px-2">
+					<td>
 						<a href="?section=student&page=add-sub-form&id=<?php echo $stu_id; ?>" title="Add subjects to the student"
-							class="flex justify-center items-center py-2 text-white bg-blue-600 rounded hover:bg-blue-700 text-xs">
-						<img src="./public/add.png" alt="add image" class="w-4 h-4 invert">
+							>
+						<img src="./public/add.png" alt="add image" >
 						</a>
 					</td>
 				</tr>
