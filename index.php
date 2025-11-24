@@ -60,7 +60,7 @@
 						<?php echo ucfirst($sec) . " Details" ?>
 					</h1>
 
-					<a href="?page=create-form&section=<?php echo ucfirst($sec); ?>" title="<?php echo "Add New " . ucfirst($sec) . " Details"; ?>"
+					<a href="?page=create-form&section=<?php echo $sec; ?>" title="<?php echo "Add New " . ucfirst($sec) . " Details"; ?>"
 					class="bg-[#FFBF00] px-6 py-3 text-black w-40 hover:bg-[#CB9800] rounded-[10px]">
 					+ Add <?php echo ucfirst($sec); ?>
 					</a>
