@@ -123,16 +123,18 @@
 							if (file_exists($path)) {
 								include_once($path);
 							} else {
-								echo "<h1>404 page not found</h1>";
+								echo "<div class='flex justify-center items-center w-full h-full'>
+											<h1 class='text-3xl text-red-600 rounded-xl px-8 py-12 border border-dashed border-red-600'>
+												404 page not found
+											</h1>
+										<div>"
+									;
 							}
 
 					?>
 				</div>
 			</td>
 		</tr>
-		<!-- <tr style="height: 10%;" class="bg-[#2E4756]">
-			<td colspan="2" style="width: 100%;" class="text-white text-2xl"><div class="flex justify-center w-full h-full items-center">Footer</div></td>
-		</tr> -->
 	</table>
 </body>
 
